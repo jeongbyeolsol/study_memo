@@ -1,0 +1,96 @@
+📁 1. 파일 및 디렉토리
+
+명령어  설명                        예시
+pwd     현재 디렉토리 경로 표시     pwd
+ls      파일 목록 보기              ls -l / ls -a
+cd      디렉토리 이동               cd ~/Downloads
+mkdir   디렉토리 생성               mkdir myfolder
+touch   빈 파일 생성                touch test.txt
+cp      파일 복사                   cp a.txt b.txt
+mv      파일 이동/이름 변경         mv a.txt ../
+rm      파일 삭                     rm a.txt / rm -r myfolder/
+find    파일 검색                   find . -name "*.py"
+tree    디렉토리 구조 표시          tree (설치 필요)
+sort    정렬                        sort [옵션] 파일명
+tee     pip결과를 저장 및 출력      command | tee [파일명]
+tr      문자 하나하나를 변환        tr '\t' ' ' < input.txt > output.txt  
+sed     문자열/정규표현식 기반 치환 sed 's/찾을문자/바꿀문자/g' input.txt > output.txt
+expand  탭을 공백으로 바꿈          expand input.txt > output.txt
+
+
+📝 2. 파일 내용 보기
+
+명령어      설명                    예시
+echo        문자열을 출력           echo [옵션] 문자열
+grep        원하는 문자열 찾기      grep [옵션] '패턴' [파일명]
+cat         전체 출력               cat file.txt
+less        페이지 단위로 보기      less file.txt
+more        ''                      more file.txt
+head        앞부분 10줄 보기        head file.txt
+tail        뒷부분 10줄 보기        tail file.txt
+nano, vim   텍스트 편집기           nano file.txt, vim file.txt
+wc          단어, 줄, 문자 수 세기  wc [옵션] [파일명]
+
+
+🧑 3. 사용자 및 권한
+
+명령어  설명   
+             예시
+whoami  현재 사용자         whoami
+id      사용자 정보         id
+chmod   권한 변경           chmod +x script.sh
+chown   소유자 변경         chown user:group file.txt
+sudo    관리자 권한 실행    sudo apt update
+
+
+🧠 5. 시스템 정보 및 모니터링
+
+명령어	설명	예시
+top         실시간 프로세스         top
+htop        향상된 top (설치 필요)  htop
+df -h       디스크 사용량           df -h
+du -sh      디렉토리 용량           du -sh folder/
+free -h     메모리 사용량           free -h
+uptime      시스템 가동 시간        uptime
+uname -a    커널 정보               uname -a
+
+
+🧵 6. 프로세스 관리
+
+명령어  설명            예시
+ps aux  전체 프로세스   ps aux
+kill    프로세스 종료	kill 12345
+killall 이름으로 종료   killall python3
+bg      백그라운드 전환 bg
+fg      포그라운드 전환	fg
+free -h 메모리 사용량 확인
+df -h/du -sh    디스크 용량 확인
+
+
+🌐 7. 네트워크
+
+명령어          설명            예시
+ping            연결 확인       ping google.com
+curl            웹 요청         curl example.com
+wget            파일 다운로드   wget http://...
+ifconfig / ip a IP 정보         ip a
+netstat -tuln   포트 확인       netstat -tuln
+
+
+⚙️ 8. 기타 유용한 명령어
+
+명령어  설명            예시
+alias   별칭 설정       alias ll='ls -l'
+history 명령어 기록     history
+clear   터미널 초기화   clear
+man     매뉴얼 보기     man ls
+which   경로 확인       which python
+time    실행 시간 측정  time python test.py
+date    현재 날짜       date
+
+
+
+📌 추천 학습 팁
+man <명령어>로 설명 읽기: 공식 매뉴얼
+
+--help 옵션 붙여보기: 예시 출력

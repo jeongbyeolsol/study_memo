@@ -1,0 +1,17 @@
+✅ 정규표현식의 기본 문법
+
+문법    의미	                    예시
+.       아무 문자 한 개             a.c → abc, acc, a+c 등
+*       앞 문자가 0회 이상 반복     lo* → l, lo, loo, looo
++       앞 문자가 1회 이상 반복     lo+ → lo, loo (l은 매칭 안됨)
+?       앞 문자가 0 또는 1회        colou?r → color, colour
+^       줄의 시작                   ^Hello → Hello로 시작
+$       줄의 끝                     end$ → end로 끝
+[...]   대괄호 안 문자 중 하나      [abc] → a, b, c
+[^...]  대괄호 안 문자가 아닌 것    [^0-9] → 숫자 제외한 문자
+[a-z]   a부터 z까지                 [0-9] → 숫자 0~9
+{n}     n회 반복                    a{3} → aaa
+{n,}    n회 이상 반복               a{2,} → aa, aaa, aaaa...
+{n,m}   n~m회 반복                  a{2,4} → aa, aaa, aaaa
+\       특수문자 이스케이프         \. → 마침표 그 자체
+|       OR(-E욥션 사용 시 인식)     grep -E 'jpg|png|gif' files.txt
