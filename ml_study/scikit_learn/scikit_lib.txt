@@ -1,0 +1,59 @@
+sklearn
+│
+├── datasets        👉 데이터셋 불러오기
+├── model_selection 👉 훈련/검증 데이터 분리, 교차검증, 하이퍼파라미터 튜닝
+├── preprocessing   👉 전처리 (정규화, 인코딩 등)
+├── metrics         👉 모델 성능 평가
+├── linear_model    👉 선형 회귀, 로지스틱 회귀 등
+├── tree            👉 결정트리
+├── ensemble        👉 랜덤포레스트, 그레이디언트 부스팅 등
+├── neighbors       👉 KNN
+├── svm             👉 서포트 벡터 머신
+├── naive_bayes     👉 나이브 베이즈
+├── cluster         👉 KMeans 등 비지도학습
+├── decomposition   👉 PCA 등 차원 축소
+├── feature_extraction / feature_selection
+├── pipeline        👉 전처리 + 모델 연결
+└── utils           👉 내부 유틸
+
+
+
+모듈                    용도                주요 함수
+sklearn.datasets        예제 데이터         load_iris, load_boston, fetch_openml
+sklearn.model_selection	데이터 분할, 튜닝   train_test_split, GridSearchCV, KFold
+sklearn.preprocessing	전처리              StandardScaler, MinMaxScaler, OneHotEncoder
+sklearn.metrics         평가                accuracy_score, mean_squared_error, confusion_matrix
+sklearn.linear_model    선형 모델           LinearRegression, LogisticRegression, Ridge
+sklearn.tree            트리 기반 모델      DecisionTreeClassifier, export_graphviz
+sklearn.ensemble        앙상블              RandomForestClassifier, GradientBoostingClassifier
+sklearn.svm             SVM                 SVC, SVR
+sklearn.neighbors       KNN                 KNeighborsClassifier, KNeighborsRegressor
+sklearn.cluster         군집화              KMeans, DBSCAN
+sklearn.pipeline        파이프라인 구축     Pipeline, make_pipeline
+
+
+
+🎯 사용 흐름에 따른 구조 예시
+
+# 1. 데이터 준비
+from sklearn.datasets import load_iris
+
+# 2. 전처리
+from sklearn.preprocessing import StandardScaler
+
+# 3. 학습/검증 분리
+from sklearn.model_selection import train_test_split
+
+# 4. 모델 선택
+from sklearn.linear_model import LogisticRegression
+
+# 5. 학습
+model.fit(X_train, y_train)
+
+# 6. 예측
+y_pred = model.predict(X_test)
+
+# 7. 평가
+from sklearn.metrics import accuracy_score
+print("정확도:", accuracy_score(y_test, y_pred))
+

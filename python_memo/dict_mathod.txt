@@ -1,0 +1,10 @@
+메서드                          설명                                            예시
+dict.keys()                     모든 키를 반환 (dict_keys)                      my_dict.keys() → dict_keys(['name', 'age', 'is_student'])
+dict.values()                   모든 값을 반환 (dict_values)                    my_dict.values() → dict_values(['정수', 24, True])
+dict.items()                    (키, 값) 튜플 목록 반환                         my_dict.items() → dict_items([('name', '정수'), ...])
+dict.get(key[, default])        키에 해당하는 값 반환, 없으면 None 또는 default my_dict.get("name") → '정수', my_dict.get("grade", 0) → 0
+dict.pop(key[, default])        키 삭제 + 값 반환, 없으면 예외 또는 default     my_dict.pop("age") → 24
+dict.popitem()                  마지막 항목 제거 (Python 3.7+)                  key, val = my_dict.popitem()
+dict.update([other])            다른 딕셔너리/쌍으로 병합                       my_dict.update({"grade": "A"})
+dict.clear()                    모든 항목 삭제                                  my_dict.clear()
+dict.setdefault(key[, default]) 키가 없으면 삽입, 있으면 무시                   my_dict.setdefault("score", 0)
