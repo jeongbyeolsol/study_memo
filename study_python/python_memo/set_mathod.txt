@@ -1,0 +1,29 @@
+[ ✅ 주요 set 메서드 정리 ]
+
+메서드              설명                        예시
+add(x)              원소 1개 추가               s.add(5)
+update(iterable)	여러 원소 추가              s.update([6, 7, 8])
+remove(x)           원소 제거, 없으면 에러	    s.remove(2)
+discard(x)          원소 제거, 없어도 에러 없음 s.discard(2)
+pop()               아무 원소 하나 제거 + 반환  s.pop()
+clear()             전체 제거                   s.clear()
+
+
+[ ✅ 집합 연산 (수학적 연산과 같음) ]
+
+연산        기호/메서드	                설명                예시
+합집합      |, union()`                 모든 원소           a | b 또는 a.union(b)
+교집합      &, intersection()           공통 원소           a & b 또는 a.intersection(b)
+차집합      -, difference()             a에만 있는 원소     a - b 또는 a.difference(b)
+대칭차집합  ^, symmetric_difference()   한쪽에만 있는 원소  a ^ b
+
+
+[ ✅ 기타 메서드 ]
+
+메서드              설명
+copy()              얕은 복사
+issubset(other)     부분집합인지 확인 (a ⊆ b)
+issuperset(other)   상위집합인지 확인 (a ⊇ b)
+isdisjoint(other)   공통 원소가 없는지 확인
+
+집합의 항목으로 리스트, 사전, 집합과 같은 가변 자료형은 사용할 수 없다.

@@ -1,0 +1,72 @@
+[ ✅ 1. 문자열 확인 / 검사 (조건 )판별 ]
+
+메서드          설명                            예시
+isalpha()       모든 문자가 알파벳인지          "abc".isalpha() → True
+isdigit()       모든 문자가 숫자인지            "123".isdigit() → True
+isalnum()       알파벳 또는 숫자인지            "abc123".isalnum() → True
+isspace()       공백 문자로만 구성되어 있는지   " ".isspace() → True
+islower()       전부 소문자인지                 "hello".islower() → True
+isupper()       전부 대문자인지                 "HELLO".isupper() → True
+startswith(sub) sub로 시작하는지                "python".startswith("py") → True
+endswith(sub)   sub로 끝나는지                  "python".endswith("on") → True
+
+
+[ ✅ 2. 문자열 변경 (새 문자열 반환) ]
+
+메서드              설명                    예시
+lower()             모두 소문자로           "HELLO".lower() → "hello"
+upper()	            모두 대문자로           "hi".upper() → "HI"
+capitalize()	    첫 글자만 대문자        "hello".capitalize() → "Hello"
+title()	            각 단어 첫 글자 대문자  "hello world".title() → "Hello World"
+strip()	            앞뒤 공백 제거          " hi ".strip() → "hi"
+lstrip() / rstrip() 왼쪽/오른쪽 공백 제거   " hi".lstrip() → "hi"
+replace(a, b)       a를 b로 바꿈            "apple".replace("p", "b") → "abble"
+
+
+[ ✅ 3. 문자열 분리 / 결합 ]
+
+메서드          설명                    예시
+split(sep)      구분자로 나눔 → 리스트  "a,b,c".split(",") → ['a', 'b', 'c']
+rsplit(sep)     오른쪽부터 나눔	        "a,b,c".rsplit(",", 1) → ['a,b', 'c']
+partition(sep)  한 번만 나눔 → 튜플     "a:b".partition(":") → ('a', ':', 'b')
+join(리스트)    리스트를 연결           ",".join(["a", "b", "c"]) → "a,b,c"
+
+
+[ ✅ 4. 찾기 관련 ]
+
+메서드      설명                            예시
+find(sub)   sub의 첫 위치 반환, 없으면 -1   "banana".find("na") → 2
+rfind(sub)  오른쪽에서 첫 위치	            "banana".rfind("na") → 4
+index(sub)  위치 반환, 없으면 ValueError    "banana".index("na") → 2
+count(sub)  부분 문자열 개수                "banana".count("a") → 3
+
+
+[ ✅ 5. 정렬/형식 관련 ]
+
+메서드                      설명                    예시
+center(width)               가운데 정렬             "hi".center(6) → " hi "
+ljust(width) / rjust(width) 왼쪽/오른쪽 정렬        "hi".ljust(6) → "hi "
+zfill(width)	            왼쪽에 0 채움          "42".zfill(5) → "00042"
+format()                    문자열 포매팅           "이름: {}".format("정수")
+f"{}"                       f-string 방식 포매팅    f"이름: {'정수'}"
+
+
+[ ✅ 6. 기타 유용한 것들 ]
+
+메서드          설명            예시
+encode()        문자열 → 바이트 "안녕".encode() → b'\xec\x95\x88\xeb\x85\x95'
+expandtabs()    탭 → 공백 변환  "a\tb".expandtabs(4) → "a b"
+swapcase()      대소문자 반전   "HeLLo".swapcase() → "hEllO"
+
+len()           길이            len("string") -> 6       
+
+
+[ ✅ 요약 표 ]
+
+분류            대표 메서드
+검사            isalpha(), isdigit(), startswith(), in
+변경            lower(), replace(), strip()
+분리/결합       split(), join()
+찾기            find(), count()
+정렬            center(), zfill()
+포매팅          format(), f-string
