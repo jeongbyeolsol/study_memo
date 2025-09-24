@@ -12,6 +12,8 @@
     -  `__len__`(self): 전체 데이터 개수 반환
     - `__getitem__`(self, idx): 인덱스에 해당하는 데이터 반환 
   - **`DataLoader`**: 데이터를 배치 단위로 불러옴
+    - DataLoader는 이 Dataset을 감싸서 배치(batch) 단위로 구성하고 반복(iterable) 가능한 객체로 만듬
+    - 배치(batch) = 한 번에 모델에 집어넣어 학습시키는 데이터 묶음
   - **`TensorDataset`**: 여러 텐서를 묶어 하나의 데이터셋으로 사용
   - **`Sampler`** 계열: 데이터 샘플링 방식 제어
   - **`Subset`**: 일부 인덱스만 선택
