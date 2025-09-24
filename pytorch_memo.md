@@ -13,7 +13,7 @@
     - `__getitem__`(self, idx): 인덱스에 해당하는 데이터 반환 
   - **`DataLoader`**: 데이터를 배치 단위로 불러옴
   - **`TensorDataset`**: 여러 텐서를 묶어 하나의 데이터셋으로 사용
-  - Sampler 계열: 데이터 샘플링 방식 제어
+  - **`Sampler`** 계열: 데이터 샘플링 방식 제어
   - **`Subset`**: 일부 인덱스만 선택
   - **`ConcatDataset`**: 여러 데이터셋 합치기
   - **`random_split`**: 데이터셋을 랜덤하게 분할
