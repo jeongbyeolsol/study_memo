@@ -2,7 +2,7 @@
 
 ## 모듈 정리
 
-- **torch.utils.data**
+- [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
 
   데이터셋과 배치를 다루는 기본 모듈.
 
@@ -30,11 +30,12 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
            pin_memory=False, drop_last=False, timeout=0,
            worker_init_fn=None, *, prefetch_factor=2,
            persistent_workers=False)
+
 # 주요 파라미터
 # dataset: 불러올 데이터셋 객체
 # batch_size: 배치 크기 (기본값=1)
 # shuffle: 데이터 순서를 섞을지 여부
 # num_workers: 데이터를 병렬로 불러올 프로세스 개수
-# drop_last: 마지막 불완전 배치를 버릴지 여부-
+# drop_last: 마지막 불완전 배치를 버릴지 여부
 # collate_fn: 배치 구성 방식을 지정하는 함수
 ```
