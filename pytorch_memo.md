@@ -95,7 +95,7 @@ TensorFlow/Keras: (N, H, W, C)
 
 모델을 정의할 때 필수로 만들 것
 
-### **__init__**
+### __**init**__
 
 Python 클래스의 생성자(constructor)
 
