@@ -1,5 +1,34 @@
 # pytorch 공부
 
+---
+
+## 개념 정리
+
+### 텐서(tensor)
+
+**텐서 = 다차원 배열 (multi-dimensional array)**
+
+PyTorch의 torch.Tensor는 GPU에서 연산할 수 있도록 설계된 넘파이 배열의 확장판
+
+- GPU에서 연산 가능 (.to('cuda'))
+
+- 자동 미분 가능 (requires_grad=True)
+
+- 딥러닝 모델에 바로 넣기 최적화
+
+### batch
+
+batch = 텐서 묶음 단위 = 한 번에 모델에 집어넣어 학습시키는 데이터 묶음
+
+PyTorch에서는 배치 차원이 텐서의 첫 번째 차원으로 들어감
+
+- 예시:
+  - 흑백 이미지 한 장 → [1, 28, 28] (C,H,W)
+  - 이미지 32장 묶음(batch) → [32, 1, 28, 28] (N,C,H,W)
+
+
+---------
+
 ## 모듈 정리
 
 - [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
@@ -13,7 +42,6 @@
     - `__getitem__`(self, idx): 인덱스에 해당하는 데이터 반환 
   - **`DataLoader`**: 데이터를 배치 단위로 불러옴
     - DataLoader는 이 Dataset을 감싸서 배치(batch) 단위로 구성하고 반복(iterable) 가능한 객체로 만듬
-    - 배치(batch) = 한 번에 모델에 집어넣어 학습시키는 데이터 묶음
   - **`TensorDataset`**: 여러 텐서를 묶어 하나의 데이터셋으로 사용
   - **`Sampler`** 계열: 데이터 샘플링 방식 제어
   - **`Subset`**: 일부 인덱스만 선택
