@@ -3,36 +3,35 @@
 ---
 
 ## PyTorch 학습 파이프라인 흐름
-
-- 1. **모델 구조 정의**
+1. **모델 구조 정의**
   - `__init__`: 레이어(파라미터 포함) 선언
   - `forward`: 데이터가 흘러가는 연산 정의
 
-- 2. **손실 함수(loss function) & 최적화 알고리즘(optimizer) 정의**
+2. **손실 함수(loss function) & 최적화 알고리즘(optimizer) 정의**
   - 손실 함수: 예측값과 정답 비교 (`nn.CrossEntropyLoss`, `nn.MSELoss` 등)
   - 옵티마이저: 파라미터 업데이트 규칙 정의 (`optim.SGD`, `optim.Adam` 등)
 
-- 3. **데이터 준비**
+3. **데이터 준비**
   - Dataset + DataLoader
   - CPU/GPU 어디서 연산할지 device 결정 → .to(device)로 옮김
 
-- 4. **순전파 (forward pass)**
+4. **순전파 (forward pass)**
   - `pred = model(X)`
   - 입력 → 레이어 통과 → 출력(logits)
 
-- 5. **손실 계산**
+5. **손실 계산**
   - `loss = loss_fn(pred, y)`
   - 모델 출력과 정답 비교 → 스칼라 손실값
 
-- 6. **역전파 (backward pass)**
+6. **역전파 (backward pass)**
   - `loss.backward()`
   - 오차를 바탕으로 각 파라미터의 gradient 계산
 
-- 7. **파라미터 갱신 (update)**
+7. **파라미터 갱신 (update)**
   - `optimizer.step()` → gradient 기반으로 weight/bias 업데이트
   - `optimizer.zero_grad()` → gradient 초기화 (누적 방지)
 
-- 8. **반복 학습**
+8. **반복 학습**
   - 위 과정을 여러 배치, 여러 epoch 동안 반복
   - 손실이 줄고, 모델 성능이 안정화될 때까지 학습
 
