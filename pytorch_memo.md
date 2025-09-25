@@ -140,10 +140,10 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
   - 모듈 기반 (nn.Module)
     - 모든 신경망의 기본 클래스, 모델을 만들 때 상속받아 사용
   - 레이어 (Layers)
-    - 선형(fully connected): nn.Linear
-    - 합성곱(Conv): nn.Conv2d, nn.Conv1d, nn.Conv3d
-    - 순환(RNN): nn.RNN, nn.LSTM, nn.GRU
-    - 정규화: nn.BatchNorm2d, nn.LayerNorm, nn.Dropout
+    - 선형(fully connected): `nn.Linear`
+    - 합성곱(Conv): `nn.Conv2d`, `nn.Conv1d`, `nn.Conv3d`
+    - 순환(RNN): `nn.RNN`, `nn.LSTM`, `nn.GRU`
+    - 정규화: `nn.BatchNorm2d`, `nn.LayerNorm`, `nn.Dropout`
     - FFN은 2개의 선형 레이어 + 활성화 함수로 구성
     - MoE는 nn.ModuleList + nn.Linear + 샘플링 로직을 조합하면 직접 구현 가능
   - 활성화 함수
@@ -156,7 +156,15 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
     - nn.Sequential: 여러 레이어를 순서대로 쌓음
     - nn.ModuleList: 파이썬 리스트처럼 모듈 관리
     - nn.ModuleDict: 딕셔너리처럼 모듈 관리
-    
+
+```python
+  class torch.nn.Flatten(start_dim=1, end_dim=-1)
+# start_dim (기본=1): 어디서부터 flatten할지 시작 차원
+# end_dim (기본=-1): 어디까지 flatten할지 끝 차원
+# start_dim~end_dim 사이의 모든 차원을 1D로 펴버림.
+```
+
+  
 ---
 
 ### [**torch.nn.Module**](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html)
