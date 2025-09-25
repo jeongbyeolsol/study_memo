@@ -74,7 +74,7 @@ nn.Module을 상속받아 모델을 만들 때, 입력 → 출력 계산 과정�
 
 즉, **순전파(forward propagation)** 를 어떻게 할지 정하는 부분.
 
-model(x)를 호출하면 내부적으로 forward(x)가 실행.
+model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메서드를 정의해두면, 그 객체를 “함수처럼” 호출할 수 있음)
 
 **역전파(backward)** 는 PyTorch가 `autograd`로 자동 계산
 
