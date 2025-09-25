@@ -48,6 +48,18 @@ TensorFlow/Keras: (N, H, W, C)
 
 ---------
 
+### 컨테이너(Container)
+
+여러 레이어를 묶어 관리하는 클래스
+
+- nn.Sequential: 순차적으로 레이어를 쌓음 (forward 정의 필요 없음)
+- nn.ModuleList: 리스트처럼 레이어를 보관. 반복문으로 접근 가능.
+- nn.ModuleDict: 딕셔너리처럼 이름 붙여 관리.
+
+
+  
+-----
+
 ## 모듈 정리
 
 ### [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
@@ -90,6 +102,35 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
 # collate_fn: 배치 구성 방식을 지정하는 함수
 ```
 
+---
+
+### [torch.nn](https://docs.pytorch.org/docs/stable/nn.html)
+
+**PyTorch의 신경망(neural network) 관련 모듈**
+
+신경망을 쉽게 만들 수 있도록 **레이어, 손실 함수, 활성화 함수, 컨테이너(Sequential 등)** 제공
+
+- 주요 구성 요소
+  - 모듈 기반 (nn.Module)
+    - 모든 신경망의 기본 클래스, 모델을 만들 때 상속받아 사용
+  - 레이어 (Layers)
+    - 선형(fully connected): nn.Linear
+    - 합성곱(Conv): nn.Conv2d, nn.Conv1d, nn.Conv3d
+    - 순환(RNN): nn.RNN, nn.LSTM, nn.GRU
+    - 정규화: nn.BatchNorm2d, nn.LayerNorm, nn.Dropout
+    - FFN은 2개의 선형 레이어 + 활성화 함수로 구성
+    - MoE는 nn.ModuleList + nn.Linear + 샘플링 로직을 조합하면 직접 구현 가능
+  - 활성화 함수
+    - nn.ReLU, nn.Sigmoid, nn.Tanh, nn.Softmax 등
+  - 손실 함수 (Loss Functions)
+    - 회귀: nn.MSELoss
+    - 분류: nn.CrossEntropyLoss, nn.NLLLoss
+    - 그 외: nn.BCELoss, nn.HingeEmbeddingLoss 등
+  - 컨테이너 (Containers)
+    - nn.Sequential: 여러 레이어를 순서대로 쌓음
+    - nn.ModuleList: 파이썬 리스트처럼 모듈 관리
+    - nn.ModuleDict: 딕셔너리처럼 모듈 관리
+    
 ---
 
 ### [**torch.nn.Module**](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html)
@@ -138,3 +179,5 @@ out = model(x)
 print(out.shape)  # torch.Size([64, 10])
 
 ```
+
+-----
