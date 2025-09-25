@@ -86,7 +86,7 @@ model(x)를 호출하면 내부적으로 forward(x)가 실행.
 
 -----
 
-## 모듈 정리
+## 모듈, 클래스 정리
 
 ### [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
 
@@ -213,5 +213,37 @@ out = model(x)
 print(out.shape)  # torch.Size([64, 10])
 
 ```
+----
 
+### torch.device
+
+텐서나 모델이 어느 장치(CPU, GPU, MPS 등) 위에 있는지를 나타내는 객체
+
+```python
+# 생성 방법
+import torch
+
+cpu_device = torch.device("cpu")        # CPU
+cuda_device = torch.device("cuda")      # GPU (기본은 0번)
+cuda1_device = torch.device("cuda:1")   # 두 번째 GPU
+mps_device = torch.device("mps")        # Apple Silicon (Mac)
+```
+
+
+```python
+# 사용 예시
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# 텐서를 해당 장치로 이동
+x = torch.randn(3, 3)
+x = x.to(device)
+
+# 모델도 이동
+model = torch.nn.Linear(3, 3)
+model = model.to(device)
+
+print(x.device)     # cuda:0 또는 cpu
+print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장치
+
+```
 -----
