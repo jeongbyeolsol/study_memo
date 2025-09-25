@@ -58,6 +58,16 @@ TensorFlow/Keras: (N, H, W, C)
 
 ---
 
+### __init__
+
+Python 클래스의 생성자(constructor)
+
+모델의 구성 요소(레이어, 파라미터 등)를 정의
+
+-> forward에서 그 구성 요소와 연산을 어떻게 연결해서 데이터를 흘려보낼지 정의
+
+---
+
 ### forward
 
 nn.Module을 상속받아 모델을 만들 때, 입력 → 출력 계산 과정을 정의하는 함수.
