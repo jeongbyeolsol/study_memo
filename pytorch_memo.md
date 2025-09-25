@@ -249,8 +249,8 @@ mps_device = torch.device("mps")        # Apple Silicon (Mac)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # 텐서를 해당 장치로 이동
-x = torch.randn(3, 3)
-x = x.to(device)
+x = torch.randn(3, 3) 
+x = x.to(device)      # X의 값을 GPU 메모리로 복사해서, device 속성이 cuda/cpu인 새 텐서를 반환
 
 # 모델도 이동
 model = torch.nn.Linear(3, 3)
