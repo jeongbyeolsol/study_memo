@@ -253,3 +253,13 @@ print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장�
 
 ```
 -----
+
+### [torch.optim](https://docs.pytorch.org/docs/stable/optim.html)
+
+PyTorch에서 신경망 학습 시 파라미터를 업데이트하는 알고리즘들을 모아둔 모듈.
+
+예: SGD, Adam, RMSprop 등.
+
+모델의 파라미터(model.parameters())를 받아서 gradient 기반으로 업데이트
+
+---
