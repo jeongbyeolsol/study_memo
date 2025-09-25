@@ -52,12 +52,39 @@ TensorFlow/Keras: (N, H, W, C)
 
 여러 레이어를 묶어 관리하는 클래스
 
-- nn.Sequential: 순차적으로 레이어를 쌓음 (forward 정의 필요 없음)
+- nn.Sequential: 순차적으로 레이어를 쌓음 (forward 정의 필요 없음/forward 과정을 자동으로 처리)
 - nn.ModuleList: 리스트처럼 레이어를 보관. 반복문으로 접근 가능.
 - nn.ModuleDict: 딕셔너리처럼 이름 붙여 관리.
 
+---
 
-  
+### forward
+
+nn.Module을 상속받아 모델을 만들 때, 입력 → 출력 계산 과정을 정의하는 함수.
+
+즉, **순전파(forward propagation)** 를 어떻게 할지 정하는 부분.
+
+model(x)를 호출하면 내부적으로 forward(x)가 실행.
+
+>forward가 아래 흐름을 코드로 어떻게 계산할지 정함
+>>  1. 입력 데이터 x가 들어옴
+>> 
+>>  2. 선형 변환(가중치·편향)
+>> 
+>>  3. 활성화 함수(ReLU, Sigmoid 등)
+>> 
+>>  4. 다음 레이어로 전달
+>> 
+>>  5. 마지막에 예측 결과 출력
+
+**역전파(backward)** 는 PyTorch가 `autograd`로 자동 계산
+
+사용자가 직접 오버라이드(override)해서 작성
+- forward 안에서:
+  - 레이어 호출 (self.fc1(x))
+  - 활성화 함수 (F.relu)
+  - 텐서 연산 (x.view)
+
 -----
 
 ## 모듈 정리
