@@ -303,14 +303,34 @@ torch.save(obj, "경로/이름.pth")
 
 ```python
 torch.save(model.state_dict(), "model.pth")
-
 ```
 
 모델 전체를 저장하면(PyTorch 객체 자체 저장) → 파이썬 코드 버전, 경로 등에 의존성이 생겨서 이식성이 떨어짐.
 
-반면 state_dict()는 순수한 파라미터 값만 저장하니까, 나중에 같은 모델 클래스를 새로 정의한 후 load_state_dict로 불러오기만 하면 됨.
+반면 `state_dict()`는 순수한 파라미터 값만 저장하니까, 나중에 같은 모델 클래스를 새로 정의한 후 `load_state_dict`로 불러오기만 하면 됨.
 
 즉, “코드와 파라미터를 분리”할 수 있음.
+
+### `load_state_dict`
+
+`load_state_dict`는 `state_dict`를 다시 모델에 불러오는 함수
+
+`model.state_dict()` → **모델의 학습된 파라미터(가중치/편향 등)** 를 딕셔너리로 반환
+
+`torch.save(...)` → 그걸 파일로 저장
+
+`model.load_state_dict(...)` → 저장된 파라미터 dict을 다시 모델에 불러오기 (인자로 **state_dict 객체(OrderedDict)** 를 받음)
+
+
+```python
+# 저장
+torch.save(model.state_dict(), "model.pth")
+
+# 불러오기
+model = NeuralNetwork()                           # 같은 구조의 모델 인스턴스 필요
+model.load_state_dict(torch.load("model.pth"))    # 가중치 로드
+model.eval()                                      # 추론 모드 전환
+```
 
 ---
 
