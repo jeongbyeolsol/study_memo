@@ -308,6 +308,17 @@ torch.save(obj, "경로/이름.pth")
 # "파일명": 저장될 파일 이름
 ```
 
+### `torch.load`
+
+저장된 PyTorch 객체를 디스크에서 읽어오는 함수.
+
+`torch.save`로 저장한 걸 다시 메모리로 불러올 때 사용.
+
+```python
+torch.load(f, map_location=None)
+```
+
+
 ### `model.state_dict()`
 
 **모델의 모든 학습 가능한 파라미터(가중치와 편향)와 버퍼(예: BatchNorm 통계)**\를 딕셔너리 형태로 반환.
@@ -328,11 +339,15 @@ torch.save(model.state_dict(), "model.pth")
 
 `load_state_dict`는 `state_dict`를 다시 모델에 불러오는 함수
 
-`model.state_dict()` → **모델의 학습된 파라미터(가중치/편향 등)**\를 딕셔너리로 반환
+모델 인스턴스에 파라미터(state_dict)를 주입하는 메서드.
 
-`torch.save(...)` → 그걸 파일로 저장
+- 흐름
+  
+  - `model.state_dict()` → **모델의 학습된 파라미터(가중치/편향 등)**\를 딕셔너리로 반환
 
-`model.load_state_dict(...)` → 저장된 파라미터 dict을 다시 모델에 불러오기 (인자로 **state_dict 객체(OrderedDict)**\를 받음)
+  - `torch.save(...)` → 그걸 파일로 저장
+
+  - `model.load_state_dict(...)` → 저장된 파라미터 dict을 다시 모델에 불러오기 (인자로 **state_dict 객체(OrderedDict)**\를 받음)
 
 
 ```python
