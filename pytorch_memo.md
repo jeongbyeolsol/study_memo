@@ -375,7 +375,7 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
 커스텀 데이터셋을 만들 때 상속하는 기본 
 
 - 필수로 구현해야 할 메서드:
-  - `__init__`: 초기화 (이건 필수x)
+  - `__init__`: 초기화 (이건 꼭 필수는 아님)
   -  `__len__`(self): 전체 데이터 개수 반환
   - `__getitem__`(self, idx): 인덱스에 해당하는 데이터 반환
 
