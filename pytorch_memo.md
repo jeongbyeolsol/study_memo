@@ -346,7 +346,7 @@ model.eval()                                      # 추론 모드 전환
 
 ## 클래스 정리
 
-### `DataLoader` (`torch.utils.data.DataLoader`)
+### `DataLoader` [`torch.utils.data.DataLoader`](https://docs.pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader)
 
 **batch 단위로 데이터를 꺼낼 수 있는 반복자(iterator)**
 
