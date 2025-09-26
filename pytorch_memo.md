@@ -215,6 +215,41 @@ model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메�
 
 -----
    
+### `.item()`
+
+PyTorch 텐서를 **파이썬 숫자(float, int)** 로 변환하는 메서드.
+
+조건: 텐서 안에 값이 정확히 1개일 때만 가능.
+
+```python
+x = torch.tensor([3.14])
+print(x.item())       # 3.14 (float)
+
+y = torch.tensor(7)
+print(y.item())       # 7 (int)
+
+```
+
+### `.argmax(dim)`
+
+argmax = "가장 큰 값의 인덱스"를 반환하는 함수
+
+PyTorch에서는 `tensor.argmax(dim=n)`처럼 쓰고, 어떤 차원에서 찾을지를 dim으로 정함.
+
+`x.argmax(dim=0)` → 열(column) 기준 / `x.argmax(dim=1)` → 행(row) 기준
+
+pred는 `[batch, num_classes]` 점수 행렬 -> 가장 높은 점수를 받은 클래스가 예측
+
+```python
+pred = tensor([
+  [0.1, 0.7, 0.2],   # 샘플 1에 대한 클래스 0,1,2 점수
+  [0.9, 0.05, 0.05], # 샘플 2
+  [0.2, 0.1, 0.7],   # 샘플 3
+  [0.3, 0.3, 0.4]    # 샘플 4
+])
+
+pred.argmax(1)  # tensor([1, 0, 2, 2])
+```
 
 ----
 
