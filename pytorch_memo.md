@@ -384,7 +384,7 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
 
 ----
 
-### [**torch.nn.Module**](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html)
+### [`torch.nn.Module`](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html)
 
 PyTorch 모든 신경망 레이어와 모델의 부모 클래스
 
@@ -432,7 +432,7 @@ print(out.shape)  # torch.Size([64, 10])
 ```
 ----
 
-### torch.device
+### `torch.device`
 
 텐서나 모델이 어느 장치(CPU, GPU, MPS 등) 위에 있는지를 나타내는 객체
 
