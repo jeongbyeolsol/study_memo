@@ -93,34 +93,6 @@ TensorFlow/Keras: (N, H, W, C)
 
 ---
 
-모델을 정의할 때 필수로 만들 것
-
-### \_\_init\_\_
-
-Python 클래스의 생성자(constructor)
-
-모델의 구성 요소(레이어, 파라미터 등)를 정의
-
--> forward에서 그 구성 요소와 연산을 어떻게 연결해서 데이터를 흘려보낼지 정의
-
-### forward
-
-nn.Module을 상속받아 모델을 만들 때, 입력 → 출력 계산 과정을 정의하는 함수.
-
-즉, **순전파(forward propagation)** 를 어떻게 할지 정하는 부분.
-
-model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메서드를 정의해두면, 그 객체를 “함수처럼” 호출할 수 있음)
-
-**역전파(backward)** 는 PyTorch가 `autograd`로 자동 계산
-
->사용자가 직접 오버라이드(override)해서 작성
->>forward 안에서:
->>- 레이어 호출 (self.fc1(x))
->>- 활성화 함수 (F.relu)
->>- 텐서 연산 (x.view)
-
------
-
 ### 손실 함수 (Loss function)
 
 모델 출력 y'와 정답 y 사이의 차이를 수치로 계산.
@@ -130,7 +102,7 @@ model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메�
 
 모델 파라미터(가중치, 편향)를 어떻게 업데이트할지 정의하는 알고리즘.
 
------
+
 
 ### 순전파 (Forward propagation)
 
@@ -155,6 +127,93 @@ model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메�
 3. PyTorch는 이 과정을 loss.backward()에서 자동으로 처리
 4. Optimizer가 gradient를 보고 파라미터를 수정.
 
+----
+
+`model.eval()`, `model.train()`에 영향받는 레이어
+
+### Dropout
+
+- 역할
+  - **과적합 방지(regularization)**
+  - 학습할 때 신경망의 일부 뉴런을 확률적으로 끄는(0으로 만드는) 기법.
+- 학습 모드(`model.train()`)
+  - 각 뉴런을 일정 확률(p)로 랜덤하게 꺼버림.
+  - 남은 뉴런은 값이 커지지 않게 scale 보정.
+- 추론 모드(`model.eval()`)
+  - 뉴런을 끄지 않고 전부 활성화.
+  - 학습 시의 scale 보정을 그대로 반영해서 일관된 출력을 냄.
+
+### Batch Normalization (BatchNorm)
+
+- 역할
+  - 학습 중 각 배치의 평균과 분산을 계산해서 데이터를 정규화(normalization).
+  - 학습 안정화, 수렴 속도 향상.
+- 학습 모드(`model.train()`)
+  - 현재 들어온 **배치(batch)**의 평균/분산을 사용.
+  - 동시에 "러닝 평균/분산"을 업데이트해서 나중에 추론 때 쓸 준비.
+- 추론 모드(`model.eval()`)
+  - 배치에서 평균/분산을 새로 계산하지 않고, 학습 때 모아둔 러닝 평균/분산을 사용.
+
+---
+
+## 함수 정리
+
+### `zero_grad()`
+
+gradient 초기화
+
+PyTorch의 기본 동작은 **gradient를 누적(accumulate)** 일반적인 학습 루프에서는 각 배치마다 gradient를 새로 계산해야 함.
+
+
+### `model.eval()`
+
+모델을 추론(inference) 모드로 바꿈
+
+- 영향을 받는 레이어:
+
+  - Dropout → 끔 (훈련 시엔 일부 뉴런을 랜덤하게 끄지만, 추론 시엔 전부 사용)
+
+  - BatchNorm → 러닝 평균/분산 값 사용 (훈련 시엔 배치 통계 사용)
+
+### ```torch.no_grad():```
+
+autograd(자동 미분 엔진)를 끔. (PyTorch는 기본적으로 모든 텐서 연산을 추적해서 연산 그래프(computation graph)를 만듬)
+
+1. .backward()를 안 하니까 gradient 저장 안 함
+
+2. 메모리 절약 (gradient 계산 그래프를 안 만듦)
+
+3. 연산 속도 향상
+
+---
+
+모델을 정의할 때 필수로 만들 것
+
+### `__init__`
+
+Python 클래스의 생성자(constructor)
+
+모델의 구성 요소(레이어, 파라미터 등)를 정의
+
+-> forward에서 그 구성 요소와 연산을 어떻게 연결해서 데이터를 흘려보낼지 정의
+
+### `forward`
+
+nn.Module을 상속받아 모델을 만들 때, 입력 → 출력 계산 과정을 정의하는 함수.
+
+즉, **순전파(forward propagation)** 를 어떻게 할지 정하는 부분.
+
+model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메서드를 정의해두면, 그 객체를 “함수처럼” 호출할 수 있음)
+
+**역전파(backward)** 는 PyTorch가 `autograd`로 자동 계산
+
+>사용자가 직접 오버라이드(override)해서 작성
+>>forward 안에서:
+>>- 레이어 호출 (self.fc1(x))
+>>- 활성화 함수 (F.relu)
+>>- 텐서 연산 (x.view)
+
+-----
    
 
 ----
