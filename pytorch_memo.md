@@ -182,7 +182,7 @@ TensorFlow/Keras: (N, H, W, C)
   - 최적 값은 데이터와 모델 복잡도에 따라 다름.
 
 4. **하이퍼파라미터 튜닝**
-  -Grid Search, Random Search, Bayesian Optimization 같은 방법으로 Epoch 수를 포함해 실험.
+  - Grid Search, Random Search, Bayesian Optimization 같은 방법으로 Epoch 수를 포함해 실험.
 
 ---
 
