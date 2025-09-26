@@ -218,35 +218,9 @@ model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메�
 
 ----
 
-## 모듈, 클래스 정리
+## 클래스 정리
 
-### [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
-
-  데이터셋과 배치를 다루는 기본 모듈.
-
-  Dataset 클래스를 기반으로 커스텀 데이터셋을 정의하고, DataLoader를 통해 배치 단위로 불러오며, Sampler를 통해 데이터 샘플링 방식을 제어
-  
-- 주요 클래스 & 함수
-  - **`Dataset`**: 모든 데이터셋의 기본 클래스 (상속 받음)
-    -  `__len__`(self): 전체 데이터 개수 반환
-    - `__getitem__`(self, idx): 인덱스에 해당하는 데이터 반환 
-  - **`DataLoader`**: 데이터를 배치 단위로 불러옴
-    - DataLoader는 이 Dataset을 감싸서 배치(batch) 단위로 구성하고 반복(iterable) 가능한 객체로 만듬
-  - **`TensorDataset`**: 여러 텐서를 묶어 하나의 데이터셋으로 사용
-  - **`Sampler`** 계열: 데이터 샘플링 방식 제어
-  - **`Subset`**: 일부 인덱스만 선택
-  - **`ConcatDataset`**: 여러 데이터셋 합치기
-  - **`random_split`**: 데이터셋을 랜덤하게 분할
-  - **`IterableDataset`**: 크기 고정이 없는 스트리밍 데이터용
-
-  Dataset → 데이터 정의
-  DataLoader → 배치 단위 로딩
-  Sampler → 순서/샘플링 방식 제어
-  Subset/Concat/random_split → 데이터셋 조작
-
----
-
-## DataLoader
+## DataLoader (torch.utils.data.DataLoader)
 
 **batch 단위로 데이터를 꺼낼 수 있는 반복자(iterator)**
 
@@ -267,43 +241,6 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
 # drop_last: 마지막 불완전 배치를 버릴지 여부
 # collate_fn: 배치 구성 방식을 지정하는 함수
 ```
-
----
-
-### [torch.nn](https://docs.pytorch.org/docs/stable/nn.html)
-
-**PyTorch의 신경망(neural network) 관련 모듈**
-
-신경망을 쉽게 만들 수 있도록 **레이어, 손실 함수, 활성화 함수, 컨테이너(Sequential 등)** 제공
-
-- 주요 구성 요소
-  - 모듈 기반 (nn.Module)
-    - 모든 신경망의 기본 클래스, 모델을 만들 때 상속받아 사용
-  - 레이어 (Layers)
-    - 선형(fully connected): `nn.Linear`
-    - 합성곱(Conv): `nn.Conv2d`, `nn.Conv1d`, `nn.Conv3d`
-    - 순환(RNN): `nn.RNN`, `nn.LSTM`, `nn.GRU`
-    - 정규화: `nn.BatchNorm2d`, `nn.LayerNorm`, `nn.Dropout`
-    - FFN은 2개의 선형 레이어 + 활성화 함수로 구성
-    - MoE는 nn.ModuleList + nn.Linear + 샘플링 로직을 조합하면 직접 구현 가능
-  - 활성화 함수
-    - nn.ReLU, nn.Sigmoid, nn.Tanh, nn.Softmax 등
-  - 손실 함수 (Loss Functions)
-    - 회귀: nn.MSELoss
-    - 분류: nn.CrossEntropyLoss, nn.NLLLoss
-    - 그 외: nn.BCELoss, nn.HingeEmbeddingLoss 등
-  - 컨테이너 (Containers)
-    - nn.Sequential: 여러 레이어를 순서대로 쌓음
-    - nn.ModuleList: 파이썬 리스트처럼 모듈 관리
-    - nn.ModuleDict: 딕셔너리처럼 모듈 관리
-
-```python
-  class torch.nn.Flatten(start_dim=1, end_dim=-1)
-# start_dim (기본=1): 어디서부터 flatten할지 시작 차원
-# end_dim (기본=-1): 어디까지 flatten할지 끝 차원
-# start_dim~end_dim 사이의 모든 차원을 1D로 펴버림.
-```
-
   
 ---
 
@@ -388,6 +325,72 @@ print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장�
 ```
 -----
 
+## 모듈 정리
+
+### [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
+
+  데이터셋과 배치를 다루는 기본 모듈.
+
+  Dataset 클래스를 기반으로 커스텀 데이터셋을 정의하고, DataLoader를 통해 배치 단위로 불러오며, Sampler를 통해 데이터 샘플링 방식을 제어
+  
+- 주요 클래스 & 함수
+  - **`Dataset`**: 모든 데이터셋의 기본 클래스 (상속 받음)
+    -  `__len__`(self): 전체 데이터 개수 반환
+    - `__getitem__`(self, idx): 인덱스에 해당하는 데이터 반환 
+  - **`DataLoader`**: 데이터를 배치 단위로 불러옴
+    - DataLoader는 이 Dataset을 감싸서 배치(batch) 단위로 구성하고 반복(iterable) 가능한 객체로 만듬
+  - **`TensorDataset`**: 여러 텐서를 묶어 하나의 데이터셋으로 사용
+  - **`Sampler`** 계열: 데이터 샘플링 방식 제어
+  - **`Subset`**: 일부 인덱스만 선택
+  - **`ConcatDataset`**: 여러 데이터셋 합치기
+  - **`random_split`**: 데이터셋을 랜덤하게 분할
+  - **`IterableDataset`**: 크기 고정이 없는 스트리밍 데이터용
+
+  Dataset → 데이터 정의
+  DataLoader → 배치 단위 로딩
+  Sampler → 순서/샘플링 방식 제어
+  Subset/Concat/random_split → 데이터셋 조작
+
+---
+
+
+### [torch.nn](https://docs.pytorch.org/docs/stable/nn.html)
+
+**PyTorch의 신경망(neural network) 관련 모듈**
+
+신경망을 쉽게 만들 수 있도록 **레이어, 손실 함수, 활성화 함수, 컨테이너(Sequential 등)** 제공
+
+- 주요 구성 요소
+  - 모듈 기반 (nn.Module)
+    - 모든 신경망의 기본 클래스, 모델을 만들 때 상속받아 사용
+  - 레이어 (Layers)
+    - 선형(fully connected): `nn.Linear`
+    - 합성곱(Conv): `nn.Conv2d`, `nn.Conv1d`, `nn.Conv3d`
+    - 순환(RNN): `nn.RNN`, `nn.LSTM`, `nn.GRU`
+    - 정규화: `nn.BatchNorm2d`, `nn.LayerNorm`, `nn.Dropout`
+    - FFN은 2개의 선형 레이어 + 활성화 함수로 구성
+    - MoE는 nn.ModuleList + nn.Linear + 샘플링 로직을 조합하면 직접 구현 가능
+  - 활성화 함수
+    - nn.ReLU, nn.Sigmoid, nn.Tanh, nn.Softmax 등
+  - 손실 함수 (Loss Functions)
+    - 회귀: nn.MSELoss
+    - 분류: nn.CrossEntropyLoss, nn.NLLLoss
+    - 그 외: nn.BCELoss, nn.HingeEmbeddingLoss 등
+  - 컨테이너 (Containers)
+    - nn.Sequential: 여러 레이어를 순서대로 쌓음
+    - nn.ModuleList: 파이썬 리스트처럼 모듈 관리
+    - nn.ModuleDict: 딕셔너리처럼 모듈 관리
+
+```python
+  class torch.nn.Flatten(start_dim=1, end_dim=-1)
+# start_dim (기본=1): 어디서부터 flatten할지 시작 차원
+# end_dim (기본=-1): 어디까지 flatten할지 끝 차원
+# start_dim~end_dim 사이의 모든 차원을 1D로 펴버림.
+```
+
+---
+
+
 ### [torch.optim](https://docs.pytorch.org/docs/stable/optim.html)
 
 PyTorch에서 신경망 학습 시 파라미터를 업데이트하는 알고리즘들을 모아둔 모듈.
@@ -397,3 +400,4 @@ PyTorch에서 신경망 학습 시 파라미터를 업데이트하는 알고리�
 모델의 파라미터(model.parameters())를 받아서 gradient 기반으로 업데이트
 
 ---
+
