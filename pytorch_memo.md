@@ -362,7 +362,7 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
 # 주요 파라미터
 # dataset: 불러올 데이터셋 객체
 # batch_size: 배치 크기 (기본값=1)
-# shuffle: 데이터 순서를 섞을지 여부
+# shuffle: 데이터 순서를 섞을지 여부 / 전체 데이터셋의 순서를 먼저 섞고(shuffle), 그걸 batch_size 단위로 잘라서 배치를 만듦.
 # num_workers: 데이터를 병렬로 불러올 프로세스 개수
 # drop_last: 마지막 불완전 배치를 버릴지 여부
 # collate_fn: 배치 구성 방식을 지정하는 함수
