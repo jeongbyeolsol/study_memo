@@ -220,7 +220,7 @@ model(x)를 호출하면 내부적으로 forward(x)가 실행. (`__call__` 메�
 
 ## 클래스 정리
 
-## DataLoader (torch.utils.data.DataLoader)
+### DataLoader (torch.utils.data.DataLoader)
 
 **batch 단위로 데이터를 꺼낼 수 있는 반복자(iterator)**
 
