@@ -205,7 +205,7 @@ PyTorch의 기본 동작은 **gradient를 누적(accumulate)** 일반적인 학�
 
   - BatchNorm → 러닝 평균/분산 값 사용 (훈련 시엔 배치 통계 사용)
 
-### ```torch.no_grad():```
+### `torch.no_grad():`
 
 autograd(자동 미분 엔진)를 끔. (PyTorch는 기본적으로 모든 텐서 연산을 추적해서 연산 그래프(computation graph)를 만듬)
 
@@ -214,6 +214,19 @@ autograd(자동 미분 엔진)를 끔. (PyTorch는 기본적으로 모든 텐서
 2. 메모리 절약 (gradient 계산 그래프를 안 만듦)
 
 3. 연산 속도 향상
+
+
+### `detach()`
+
+특정 텐서를 autograd 추적에서 분리 (gradient 계산 X).
+
+### `torch.autograd.grad(outputs, inputs)`
+
+특정 연산에 대한 gradient를 바로 리턴. (모델 파라미터 전체 말고 일부만 필요할 때)
+
+### `torch.autograd.backward(tensors, grad_tensors=None)`
+
+여러 텐서에 대해 한꺼번에 backward 실행.
 
 ---
 
@@ -467,7 +480,7 @@ print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장�
 
 ## 모듈 정리
 
-### [**torch.utils.data**](https://docs.pytorch.org/docs/stable/data.html)
+### [`torch.utils.data`](https://docs.pytorch.org/docs/stable/data.html)
 
   데이터셋과 배치를 다루는 기본 모듈.
 
@@ -492,7 +505,7 @@ print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장�
 ---
 
 
-### [torch.nn](https://docs.pytorch.org/docs/stable/nn.html)
+### [`torch.nn`](https://docs.pytorch.org/docs/stable/nn.html)
 
 **PyTorch의 신경망(neural network) 관련 모듈**
 
@@ -529,7 +542,7 @@ print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장�
 ---
 
 
-### [torch.optim](https://docs.pytorch.org/docs/stable/optim.html)
+### [`torch.optim`](https://docs.pytorch.org/docs/stable/optim.html)
 
 PyTorch에서 신경망 학습 시 파라미터를 업데이트하는 알고리즘들을 모아둔 모듈.
 
@@ -539,3 +552,24 @@ PyTorch에서 신경망 학습 시 파라미터를 업데이트하는 알고리�
 
 ---
 
+### `torch.autograd`
+
+PyTorch의 **자동 미분(automatic differentiation) 엔진**을 모아둔 모듈.
+
+텐서 연산을 추적해서 **연산 그래프(computational graph)**\를 만들고, `.backward()` 호출 시 그래프를 따라 미분값(gradient)을 계산해서 저장.
+
+이 gradient를 옵티마이저(`torch.optim`)가 사용해서 파라미터를 업데이트
+
+- 텐서 생성 시 **`requires_grad=True`**로 설정하면 autograd가 이 텐서의 연산 과정을 추적.
+
+- gradient 결과는 **`.grad`** 속성에 누적(accumulate)됨.
+
+-  `y.backward()`
+ ```python
+x = torch.tensor([2.0], requires_grad=True)
+y = x ** 2
+y.backward()
+print(x.grad)  # tensor([4.])
+ ```
+
+---
