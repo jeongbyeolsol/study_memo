@@ -31,3 +31,13 @@
 > > **pytorch_memo.md** : [공식 문서](https://docs.pytorch.org/tutorials/beginner/basics/intro.html)를 읽으며 정리한거
 > > 
 > > torchvision_memo.md : 간단 정리
+
+나중에 보면 좋은거
+
+https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
+
+https://jalammar.github.io/illustrated-transformer/
+
+https://nlp.seas.harvard.edu/2018/04/03/attention.html
+
+https://huggingface.co/docs/transformers/index
