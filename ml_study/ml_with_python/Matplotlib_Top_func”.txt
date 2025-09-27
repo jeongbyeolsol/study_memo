@@ -1,0 +1,50 @@
+🔹 Matplotlib Top 7 함수
+
+1. plt.plot(x, y, style)
+    선 그래프
+    예측 곡선, 함수 형태 등을 그릴 때 자주 사용
+        plt.plot(x, y, 'r--')  # 빨간색 점선
+
+
+2. plt.scatter(x, y, c=color)
+    산점도
+    실제 데이터 포인트(관측값)를 시각화할 때 필수
+        plt.scatter(x, y, c='k')  # 검은색 점
+
+
+3. plt.hist(data, bins=30)
+    히스토그램
+    데이터 분포를 볼 때 (예: 나이 분포, 정규성 확인 등)
+        plt.hist(data, bins=20)
+
+
+4. plt.xlabel("label"), plt.ylabel("label")
+    축 라벨 붙이기
+    그래프 해석을 쉽게 만들어줌
+        plt.xlabel("input feature")
+        plt.ylabel("prediction")
+
+
+5. plt.legend(loc="best")
+    범례 표시
+    여러 곡선을 동시에 그릴 때, 각각이 뭘 의미하는지 표시
+        plt.legend(["decision tree", "linear regression"])
+
+
+6. plt.title("title")
+    그래프 제목
+    전체적인 맥락을 쉽게 이해 가능
+        plt.title("Decision Tree vs Linear Regression")
+
+
+7. plt.show()
+    그래프 출력
+    Jupyter Notebook에서는 자동으로 나오기도 하지만, 스크립트나 IDE에서는 꼭 호출해야 그래프가 보임
+        plt.show()
+
+
+✅ 정리
+    데이터 = plt.scatter
+    모델 예측 곡선 = plt.plot
+    데이터 분포 = plt.hist
+    라벨/범례/제목 = xlabel, ylabel, legend, title

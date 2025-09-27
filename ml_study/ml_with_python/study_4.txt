@@ -1,0 +1,138 @@
+원-핫 인코딩(One-Hot Encoding)
+
+🔹 pd.get_dummies(data, prefix=None, prefix_sep="_", columns=None, drop_first=False, dtype=int)
+
+주요 매개변수
+    data: DataFrame이나 Series
+    prefix: 새 열 이름 앞에 붙일 접두사 (기본은 원래 컬럼 이름)
+    prefix_sep: 접두사와 값 사이 구분자 (기본값 "_")
+    columns: 더미 변수를 만들 열 지정 (여러 개 가능)
+    drop_first=True: 첫 번째 카테고리를 제거해서 다중공선성 방지 (회귀분석 시 유용)
+    dtype: 결과 열의 데이터 타입 (보통 int)
+
+        ps) 숫자형(int, float) → 그대로 둔다
+            문자열(object), category 타입 → 원-핫 인코딩한다
+    ⚠️ 단점
+        머신러닝 파이프라인 통합이 어렵다
+
+🔹 OneHotEncoder
+    역할: 범주형 데이터를 원-핫 인코딩(0/1) 벡터로 변환하는 Scikit-Learn 전처리기. (모든 열에 수행 -> ColumnTransformer 사용)
+    Pandas의 get_dummies와 비슷하지만, 머신러닝 파이프라인과 잘 통합된다는 장점
+    주요 특징
+        문자열, 범주형 타입 모두 지원 (dtype=object나 category 열)
+        새로운 데이터에서 안 보였던 값 처리를 위한 옵션 (handle_unknown="ignore")
+        희소 행렬(sparse matrix)로 반환 (기본값, 메모리 절약)
+
+🔹 ColumnTransformer
+    역할: 여러 열에 대해 각기 다른 전처리기를 적용할 수 있게 해주는 도구.
+    데이터셋에 수치형 + 범주형이 섞여 있을 때 아주 유용.
+    예: 수치형은 표준화(Scaling), 범주형은 원-핫 인코딩.
+    ColumnTransformer의 구조
+        ColumnTransformer(
+            transformers=[
+            ("이름1", 변환기1, [적용할 열]),
+            ("이름2", 변환기2, [적용할 열]),
+            ...
+        ],
+        remainder="drop" or "passthrough"
+    )
+        "이름": 그냥 구분용 태그 (임의의 문자열 가능)
+        변환기: Scikit-Learn의 Transformer 객체 (OneHotEncoder, StandardScaler, MinMaxScaler, 등)
+        적용할 열: 리스트로 지정 (ex: ["age", "hours"])
+
+
+🔹 차이 정리
+기능                Pandas get_dummies  Scikit-Learn OneHotEncoder  ColumnTransformer
+단순 변환           O                   O                           X (다른 변환기를 묶어줌)
+ML 파이프라인 통합  X                   O                           O
+새로운 데이터 처리  X                   O (handle_unknown)          O
+여러 전처리기 조합  X                   X                           O
+
+
+
+🔹 make_column_transformer
+    **헬퍼 함수(factory function)**로, ColumnTransformer를 더 간단히 만들 수 있게 해줌.
+    이름(tag)을 자동으로 붙여주기 때문에 내가 직접 문자열을 지정하지 않아도 됨.
+    ct = make_column_transformer(
+        (StandardScaler(), ["age", "hours"]),
+        (OneHotEncoder(), ["sex", "workclass"]),
+        remainder="drop"
+    )
+
+🔹 차이점 요약
+항목        ColumnTransformer   make_column_transformer
+형태        클래스              함수 (헬퍼)
+태그 이름   직접 지정해야 함    자동 생성됨
+옵션 제어   더 세밀하게 가능    기본적인 경우 간단히 작성
+코드 길이   조금 길어짐         더 간결
+
+
+구간분할(이산화)
+    연속형 x를 미리 정한 경계로 잘라 정수 레이블(또는 원-핫)로 바꾸는 것.
+    Q1: 왜 선형 모델엔 도움이 되나
+    A: 선형/로지스틱 회귀처럼 “가중치의 선형 결합”만으로는 비선형/비단조 관계(예: U-shape)를 잘 못 잡음.
+        연속형을 구간 원-핫으로 바꾸면, 각 구간마다 서로 다른 계수를 학습해 계단 함수 형태로 비선형을 근사
+    Q2: 트리 기반 모델에선?
+    A: 모델이 내부적으로 “이산화된 표현”을 학습하므로 사전에 이산화할 필요가 거의 없음.
+        그러므로 트리 계열엔 연속형 원값 그대로가 일반적으로 최선.
+
+
+🔹 KBinsDiscretizer
+    연속형 수치 변수를 일정한 구간(bin)으로 나눠 이산형으로 변환하는 전처리기
+    🔹 주요 파라미터
+        KBinsDiscretizer(n_bins=5, encode="onehot", strategy="quantile")
+            n_bins (int): 나눌 구간의 개수 (ex: 5 → 다섯 개의 구간)
+            encode ({"onehot", "onehot-dense", "ordinal"}): 출력 형식
+                "ordinal": 0, 1, 2… (구간 번호)
+                "onehot": 희소행렬 형태의 원-핫 인코딩
+                "onehot-dense": 밀집 배열 형태의 원-핫 인코딩
+            strategy ({"uniform", "quantile", "kmeans"}): 구간을 자르는 방법
+                "uniform": 값의 최소–최대 범위를 균등 간격으로 나눔
+                "quantile": 분위수 기준 → 각 구간에 데이터 개수가 비슷하게 들어가도록 분할
+                "kmeans": k-means 클러스터 중심을 기준으로 구간을 나눔
+
+
+🔹 PolynomialFeatures
+    원본 데이터의 특성을 다항식 & 상호작용 항으로 확장하는 전처리기
+    🔹 주요 파라미터
+        PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
+            degree: 다항식의 차수 (예: 2 → 제곱까지, 3 → 세제곱까지)
+            include_bias: True면 상수항(1)을 자동으로 추가
+            interaction_only: True면 변수끼리 곱한 항만 추가하고, 제곱 같은 건 생략
+
+
+
+
+1. 일변량 통계 (Univariate Statistics)
+    아이디어: 입력 변수(특징)와 목표 변수(라벨) 간의 관계를 하나씩 독립적으로 평가해서 중요한 특징만 선택.
+    방법:
+        분류 문제에서는 카이제곱 검정(chi²), ANOVA F-검정, 상호 정보(mutual information) 등을 사용.
+        회귀 문제에서는 피어슨 상관계수, F-검정 등을 활용.
+    장점: 계산이 빠르고 단순.
+    단점: 변수 간 상호작용(interaction)을 고려하지 못함.
+
+
+2. 모델 기반 선택 (Model-Based Selection)
+    아이디어: 머신러닝 모델 자체가 어떤 특징이 중요한지 알려주는 경우, 그 결과를 이용.
+    예시:
+        Lasso (L1 정규화 회귀): 중요하지 않은 변수의 가중치를 0으로 만들어 자동 선택.
+        결정트리 / 랜덤포레스트: feature_importances_ 속성을 통해 각 특징의 중요도를 계산.
+    장점: 변수 간 관계까지 반영할 수 있음.
+    단점: 모델에 따라 선택 결과가 달라질 수 있고, 학습 비용이 큼.
+
+
+3. 반복적 선택 (Recursive Feature Elimination, RFE)
+    아이디어:
+        전체 특징으로 모델 학습
+        덜 중요한 특징 제거
+        다시 모델 학습
+        원하는 수의 특징이 남을 때까지 반복
+    장점: 모델 기반 선택보다 더 정교하게 특징을 줄여나갈 수 있음.
+    단점: 반복 학습이라 계산량이 많음.
+
+
+🗂️ 요약
+기법            핵심 원리                           장점                단점
+일변량 통계     각 특징을 독립적으로 평가           빠르고 단순         상호작용 고려 불가
+모델 기반 선택  모델이 주는 중요도 활용             관계 반영 가능      모델 의존적
+반복적 선택     중요하지 않은 특징을 하나씩 제거    정교한 선택 가능    계산 비용 큼
