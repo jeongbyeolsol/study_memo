@@ -26,7 +26,9 @@
 
 # Attention
 
-`attention(Q, K, V) = softmax(QK^T / d  + mask)`
+`attention(Q, K, V) = softmax(QK^T / d  + mask) * V`
+
+X * (WQ, WK, WV) = (Q, K, V)
 
 Q: Query vector
 
