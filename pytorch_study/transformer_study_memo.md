@@ -28,7 +28,7 @@
 
 `attention(Q, K, V) = softmax(QK^T / d  + mask) * V`
 
-X * (WQ, WK, WV) = (Q, K, V)
+X * (WQ, WK, WV) = (Q, K, V)  (각 인코더 블록마다 따로 존재하는 파라미터)
 
 Q: Query vector
 
