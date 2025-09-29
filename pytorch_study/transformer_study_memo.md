@@ -39,7 +39,7 @@ V: Value vector
 멀티헤드 어텐션에서는 이걸 여러 “head”로 쪼갬.
 
 h: head 개수
-d_k = dimension of the key vectors
+d_k = the dimension of the key vectors
 
 `d_k = d_v = d_model / h`
 
