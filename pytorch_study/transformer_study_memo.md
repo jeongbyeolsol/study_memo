@@ -34,6 +34,15 @@ K: Key vector
 
 V: Value vector
 
+인코더/디코더 블록에 들어오는 토큰 벡터는 차원 d_model
+
+멀티헤드 어텐션에서는 이걸 여러 “head”로 쪼갬.
+
+h: head 개수
+
+`d_k = d_v = d_model / h`
+
+
 # 임베딩
 
 텍스트(단어)를 숫자 벡터로 바꾸는 단계
