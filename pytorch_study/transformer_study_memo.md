@@ -28,6 +28,11 @@
 
   attention(Q, K, V) = softmax(QK^T / d  + mask)
 
+Q: Query vector
+
+K: Key vector
+
+V: Value vector
 
 # 임베딩
 
