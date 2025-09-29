@@ -22,6 +22,8 @@
  
 디코더도 인코더와 마찬가지로 **출력 차원은 입력과 동일한 d_model**을 유지
 
+다만 마지막 단계에서만 선형 변환으로 단어 분포 V차원으로 바꿈
+
 # Attention
 
   attention(Q, K, V) = softmax(QK^T / d  + mask)
