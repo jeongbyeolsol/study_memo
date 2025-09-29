@@ -19,6 +19,8 @@
 
 - **encoder-decoder-attention**
   - Query는 디코더의 은닉 상태, Key/Value는 인코더의 출력
+ 
+디코더도 인코더와 마찬가지로 **출력 차원은 입력과 동일한 d_model**을 유지
 
 # Attention
 
