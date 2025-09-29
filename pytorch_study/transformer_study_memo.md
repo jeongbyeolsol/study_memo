@@ -28,6 +28,7 @@
 
   attention(Q, K, V) = softmax(QK^T / d  + mask)
 
+Self-attention은 트랜스포머가 현재 처리 중인 단어에 다른 관련 단어들의 '이해'를 내재화하는 데 사용하는 방법.
 
 # 임베딩
 
