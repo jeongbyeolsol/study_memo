@@ -42,6 +42,10 @@
 
 디코더에 들어가는 입력 토큰은 매번 임베딩을 함 <- 위치 인코딩
 
+# The Final Linear and Softmax Layer
+
+![The Final Linear and Softmax Layer](https://jalammar.github.io/images/t/transformer_decoder_output_softmax.png)
+
 # Attention
 
 `attention(Q, K, V) = softmax(QK^T / d  + mask) * V`
