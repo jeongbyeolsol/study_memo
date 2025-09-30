@@ -20,7 +20,9 @@
 
 - Pre-LN의 경우: y = x + LayerNorm(Sublayer(x))
 
-  ![인코더 정규화](https://jalammar.github.io/images/t/transformer_resideual_layer_norm.png)
+![인코더 정규화](https://jalammar.github.io/images/t/transformer_resideual_layer_norm.png)
+
+![인코더에서 디코더로](https://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png)
 
 
 # 디코더 구조
