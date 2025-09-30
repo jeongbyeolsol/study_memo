@@ -20,6 +20,9 @@
 
 - Pre-LN의 경우: y = x + LayerNorm(Sublayer(x))
 
+맨 마지막 인코더의 출력은 어텐션 벡터 Q, K, V로 변환 (Encoder-Decoder Attention 계산을 위해)
+
+
 ![인코더에서 디코더로](https://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png)
 
 
@@ -84,6 +87,17 @@ MultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W_o
 2. 각 head는 d_k = d_v = d_model / h을 차원에서 어텐션을 계산 (d_q == d_k)
 3. Head별 출력들을 concat
 4. 마지막에 W_O로 projection. (H * W_O) / 출력을 원래 차원으로 돌려놓는 역할 R^(h*d_v x d_model)
+
+## Masked Self-Attention
+
+디코더는 자기가 생성한 단어들을 입력으로 다시 받아서 다음 단어를 예측
+
+미래 단어를 미리 보면 않도록 **마스크(mask)**\를 씌워서 현재 시점까지의 단어들만 보게 제한.
+
+## Encoder-Decoder Attention
+
+
+
 
 # 임베딩
 
