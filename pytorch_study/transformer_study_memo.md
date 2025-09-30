@@ -149,3 +149,19 @@ x_final = x_embedding + x_positional
    - 학습 초반에 의미 공간이 이미 잘 잡혀 있어서 수렴이 빠르거나, 데이터가 적어도 성능이 좋음
    - 현대에는 잘 않쓴다고 함
    
+
+# MoE
+
+MoE에서는 **여러 개의 FFN(Expert)**\를 준비해두고, 각 Expert는 기존 FFN과 똑같이 2층 구조
+
+Gating Network가 토큰마다 “어떤 Expert를 활성화할지”를 결정
+
+보통 Top-k(예: 2개) Expert만 선택해서 사용
+
+MoE의 핵심은 **“희소한 활성화(Sparse Activation)”**
+
+학습할 때: 모든 Expert 파라미터는 존재하지만, 각 토큰은 소수의 Expert만 거침.
+
+추론 시 FLOPs: 실제로 활성화된 Expert의 연산만 수행 → 연산량이 줄어듦
+
+희소한 건 FFN 자체가 아닌 **FFN의 선택(활성화)**
