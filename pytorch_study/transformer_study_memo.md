@@ -40,6 +40,8 @@
 
 다만 마지막 단계에서만 선형 변환으로 단어 분포 V차원으로 바꿈
 
+디코더에 들어가는 입력 토큰은 매번 임베딩을 함 <- 위치 인코딩
+
 # Attention
 
 `attention(Q, K, V) = softmax(QK^T / d  + mask) * V`
