@@ -1,3 +1,5 @@
+![인코더 흐름](https://jalammar.github.io/images/t/transformer_multi-headed_self-attention-recap.png)
+
 # 인코더 구조
 
 인코더를 직렬로 쌓은 구조 (원 논문 6개)
