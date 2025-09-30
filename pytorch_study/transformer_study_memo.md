@@ -67,10 +67,12 @@ MultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W_o
 
 멀티헤드에서의 동작
 
-1. 입력 차원 d_model을 h개의 head로 쪼갬.
-2. 각 head는 d_k = d_v = d_model을 / h 차원에서 어텐션을 계산
+1. 입력(토큰 하나) 차원 d_model을 h개의 head로 쪼갬.
+2. 각 head는 d_k = d_v = d_model / h을 차원에서 어텐션을 계산 (d_q == d_k)
 3. Head별 출력들을 concat
-4. 마지막에 W_o로 projection.
+4. 마지막에 W_O로 projection. (H * W_O) / 출력을 원래 차원으로 돌려놓는 역할 R^(h*d_v x d_model)
+
+단순히 concat하면 차원의 크기는 같지만 독립적 정보의 나열이라 W_O로 이를 재조합.
 
 # 임베딩
 
