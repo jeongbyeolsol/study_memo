@@ -45,6 +45,32 @@ d_k = the dimension of the key vectors
 
 `d_k = d_v = d_model / h`
 
+## Self-Attention
+
+각 단어 벡터를 다른 단어와 비교해서 “누구에게 집중할지” 가중치를 주는 메커니즘
+
+## Multi-Head Attention
+
+입력 벡터의 차원을 여러 head로 나눈
+
+각 head는 자기만의 가중치(W_Q, W_L, W_V)를 써서 **Q**, **K**, **V**를 계산하고 어텐션을 구함.
+
+-> head마다 서로 다른 표현 공간에서 문맥을 해석
+
+모든 head의 출력을 합치고(concat), 다시 선형변환해서 최종 출력으로 만듦.
+
+MultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W_o
+
+### head
+
+멀티헤드 어텐션 안에 들어 있는 하나의 독립적인 어텐션 연산 단위.
+
+멀티헤드에서의 동작
+
+1. 입력 차원 d_model을 h개의 head로 쪼갬.
+2. 각 head는 d_k = d_v = d_model을 / h 차원에서 어텐션을 계산
+3. Head별 출력들을 concat
+4. 마지막에 W_o로 projection.
 
 # 임베딩
 
