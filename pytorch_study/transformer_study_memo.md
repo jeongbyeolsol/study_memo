@@ -16,6 +16,8 @@
 
 - LayerNorm은 “토큰 하나(한 샘플)의 벡터 내부”에서 평균/분산을 계산해 정규화
 
+- LayerNorm(x+Sublayer(x))  / z = Sublayer(x)
+
   ![인코더 정규화](https://jalammar.github.io/images/t/transformer_resideual_layer_norm.png)
 
 
