@@ -152,7 +152,7 @@ x_final = x_embedding + x_positional
 
 # MoE
 
-MoE에서는 **여러 개의 FFN(Expert)**\를 준비해두고, 각 Expert는 기존 FFN과 똑같이 2층 구조
+MoE에서는 **여러 개의 FFN(Expert)**를 준비해두고, 각 Expert는 기존 FFN과 똑같이 2층 구조
 
 Gating Network가 토큰마다 “어떤 Expert를 활성화할지”를 결정
 
