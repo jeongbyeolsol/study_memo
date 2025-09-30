@@ -12,6 +12,10 @@
 
 인코더 블록의 최종 출력은 항상 입력과 동일한 차원
 
+인코더 내의 하위레이어를 거친 후 정규화를 거침 (LayerNorm) -> 출력 값의 분포를 일정하게 맞춤
+
+- LayerNorm은 “토큰 하나(한 샘플)의 벡터 내부”에서 평균/분산을 계산해 정규화
+
 # 디코더 구조
 
  **masked self-attention** -> **encoder-decoder-attention** -> **FFN**
