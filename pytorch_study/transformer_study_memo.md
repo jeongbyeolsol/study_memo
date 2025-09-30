@@ -96,7 +96,10 @@ MultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W_o
 
 ## Encoder-Decoder Attention
 
+디코더는 자기 자신 뿐 아니라, 인코더 출력(입력 문장 정보)도 참조
 
+- Q: 디코더의 hidden state (지금까지 번역한 문맥 -> 디코딩에서 변형됨)
+- K,V: 인코더 출력 (입력 문장의 의미 정보 -> 디코딩에서 유지)
 
 
 # 임베딩
