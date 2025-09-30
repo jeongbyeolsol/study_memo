@@ -72,8 +72,6 @@ MultiHead(Q, K, V) = Concat(head_1, ..., head_h) * W_o
 3. Head별 출력들을 concat
 4. 마지막에 W_O로 projection. (H * W_O) / 출력을 원래 차원으로 돌려놓는 역할 R^(h*d_v x d_model)
 
-단순히 concat하면 차원의 크기는 같지만 독립적 정보의 나열이라 W_O로 이를 재조합.
-
 # 임베딩
 
 텍스트(단어)를 숫자 벡터로 바꾸는 단계
