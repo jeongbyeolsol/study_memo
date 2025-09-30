@@ -18,6 +18,8 @@
 
 - LayerNorm(x+Sublayer(x))  / z = Sublayer(x)
 
+- Pre-LN의 경우: y = x + LayerNorm(Sublayer(x))
+
   ![인코더 정규화](https://jalammar.github.io/images/t/transformer_resideual_layer_norm.png)
 
 
