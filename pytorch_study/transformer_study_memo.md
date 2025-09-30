@@ -44,6 +44,14 @@
 
 # The Final Linear and Softmax Layer
 
+1. 디코더의 출력 hidden state 벡터
+
+2. Final Linear Layer을 거쳐 hidden state 벡터를 어휘 집합 크기 차원으로 변경
+
+3. Softmax Layer를 거쳐 확률분포로 바꿈
+
+Hidden state 벡터: 신경망 내부에서 어떤 시점·토큰을 표현하는 중간 결과 벡터
+
 ![The Final Linear and Softmax Layer](https://jalammar.github.io/images/t/transformer_decoder_output_softmax.png)
 
 # Attention
