@@ -57,6 +57,8 @@ PyTorch의 torch.Tensor는 GPU에서 연산할 수 있도록 설계된 넘파이
 
 batch = 텐서 묶음 단위 = 한 번에 모델에 집어넣어 학습시키는 데이터 묶음
 
+한 번의 forward/backward pass에서 처리하는 샘플(데이터) 개수
+
 PyTorch에서는 배치 차원이 텐서의 첫 번째 차원으로 들어감
 
 - 예시:
