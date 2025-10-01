@@ -244,7 +244,7 @@ Python 클래스의 생성자(constructor)
 
 ### `forward`
 
-nn.Module을 상속받아 모델을 만들 때, 입력 → 출력 계산 과정을 정의하는 함수.
+nn.Module을 상속받아 모델을 만들 때, "입력 → 출력" 계산 과정을 정의하는 함수.
 
 즉, **순전파(forward propagation)**/를 어떻게 할지 정하는 부분.
 
