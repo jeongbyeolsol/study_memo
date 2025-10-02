@@ -188,7 +188,7 @@ TensorFlow/Keras: (N, H, W, C)
 
 ---
 
-# Residual Connection (잔차 연결)
+### Residual Connection (잔차 연결)
 
 원래 입력 x를, 레이어 출력 F(x)와 더하는 구조
 
@@ -199,7 +199,7 @@ TensorFlow/Keras: (N, H, W, C)
   - 그래디언트 소실 완화: 역전파 시, 잔차 경로 덕분에 gradient가 직접 흘러가서 학습이 안정적임.
 
 
-# Layer Normalization (Norm)
+### Layer Normalization (Norm)
 
 학습이 불안정하지 않게, 각 샘플의 hidden state 분포를 정규화
 
@@ -221,6 +221,24 @@ TensorFlow/Keras: (N, H, W, C)
 정규화로 평균을 0에 맞춘 뒤, shift(β)가 학습을 통해 새로운 중심값을 다시 잡아줌.
 
 이 덕분에 각 뉴런/레이어가 내가 원하는 분포 중심을 쓸 수 있음.
+
+### 브로드캐스팅(broadcasting)
+
+**서로 다른 shape의 텐서끼리 연산할 때, PyTorch가 자동으로 작은 텐서를 큰 텐서에 맞게 확장(copy 없이 가상적으로 반복)하는 규칙**
+
+```
+x = torch.tensor([[1, 2, 3, 4], [5, 6, 7, 8]], dtype=float)
+
+print(x.shape)
+print(x.mean(-1).shape)
+print(x.mean(-1, keepdim=True).shape)
+
+# torch.Size([2, 4])
+# torch.Size([2])
+# torch.Size([2, 1])
+
+```
+
 
 ---
 
