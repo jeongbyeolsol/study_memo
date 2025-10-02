@@ -549,6 +549,29 @@ print(next(model.parameters()).device)  # 모델 파라미터가 위치한 장�
 ```
 -----
 
+### `nn.Dropout`
+
+학습 중에는 뉴런 일부를 확률적으로 0으로 만들어서 네트워크가 특정 뉴런에만 의존하지 못하게 함.
+
+```
+import torch
+import torch.nn as nn
+
+drop = nn.Dropout(p=0.5)   # Dropout 클래스의 인스턴스
+```
+
+p=0.5: 절반 확률로 뉴런을 죽인다
+
+nn.Dropout은 nn.Module을 상속한 클래스
+
+- 학습 중 (model.train()):
+  - Dropout이 활성화 → 뉴런 일부를 확률적으로 0으로 만듦
+
+- 평가 중 (model.eval()):
+  - Dropout이 꺼짐 → 그냥 입력을 그대로 전달
+
+-----
+
 ## 모듈 정리
 
 ### [`torch.utils.data`](https://docs.pytorch.org/docs/stable/data.html)
