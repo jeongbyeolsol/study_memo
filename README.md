@@ -22,17 +22,24 @@
 > > ml_techniques : 머신러닝 간단정리
 > >
 > > 
-> > **ml_with_python** : *introduction to machine learning with python* 책을 보며 정리한거
+> > **ml_with_python** : *introduction to machine learning with python* 책을 보며 정리한 내용
+> > 
 > > scikit_learn : scikit_learn 간단 실습
 
 ---
 
 > pytorch_study
-> > **pytorch_memo.md** : [공식 문서](https://docs.pytorch.org/tutorials/beginner/basics/intro.html)를 읽으며 정리한거
+> > **pytorch_memo.md** : [공식 문서](https://docs.pytorch.org/tutorials/beginner/basics/intro.html)를 읽으며 정리한 내용
 > > 
 > > torchvision_memo.md : 간단 정리
+> >
+> > transformer_study_memo.md : transformer에 대한 내용을 정리.
 
-나중에 보면 좋은거
+살펴보면 좋을 자료들
+
+https://cs231n.stanford.edu/schedule.html
+
+https://docs.pytorch.org/tutorials/beginner/basics/intro.html
 
 https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
 
@@ -41,3 +48,4 @@ https://jalammar.github.io/illustrated-transformer/
 https://nlp.seas.harvard.edu/2018/04/03/attention.html
 
 https://huggingface.co/docs/transformers/index
+
