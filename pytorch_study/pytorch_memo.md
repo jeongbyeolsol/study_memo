@@ -138,12 +138,21 @@ TensorFlow/Keras: (N, H, W, C)
 - 역할
   - **과적합 방지(regularization)**
   - 학습할 때 신경망의 일부 뉴런을 확률적으로 끄는(0으로 만드는) 기법.
+  - 출력 값(activation) 중 일부를 확률적으로 0으로 만든다.
 - 학습 모드(`model.train()`)
   - 각 뉴런을 일정 확률(p)로 랜덤하게 꺼버림.
   - 남은 뉴런은 값이 커지지 않게 scale 보정.
 - 추론 모드(`model.eval()`)
   - 뉴런을 끄지 않고 전부 활성화.
   - 학습 시의 scale 보정을 그대로 반영해서 일관된 출력을 냄.
+ 
+`y = (mask * x) / (1 - p)`
+
+- p: dropout 비율
+
+- mask: Bernoulli 분포에서 샘플링된 0/1 마스크
+
+- 나눗셈 1−p는 기대값을 맞추기 위해 scale 조정
 
 ### Batch Normalization (BatchNorm)
 
