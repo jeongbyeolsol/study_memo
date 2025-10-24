@@ -1,5 +1,15 @@
 # huggingface
 
+## 함수/메서드 정리
+
+### [`from_pretrained()`](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/model#transformers.PreTrainedModel.from_pretrained)
+
+**사전 학습된 모델 불러오기**
+
+모든 Hugging Face 객체(Config, Tokenizer, Model, Processor)가 공통으로 가지는 클래스 메서드
+
+---
+
 ## class 정리
 
 *Each pretrained model inherits from three base classes*
@@ -61,3 +71,17 @@
 | `Preprocessor`     | 입력 데이터 전처리기    | `tokenizer.json`, `vocab.txt` 등 | `AutoTokenizer`, `WhisperProcessor`       |
 
 ---
+
+### [AutoClass](https://huggingface.co/docs/transformers/model_doc/auto)
+
+다양한 모델 종류(BERT, GPT-2, T5, LLaMA 등)를 자동으로 감지하고 적절한 클래스로 로드해주는 팩토리(factory) 클래스
+
+| AutoClass 이름                         | 로드하는 대상                       | 내부에서 로드되는 실제 클래스                                                         |
+| ------------------------------------ | ----------------------------- | ------------------------------------------------------------------------ |
+| `AutoTokenizer`                      | 토크나이저                         | `BertTokenizer`, `GPT2Tokenizer`, ...                                    |
+| `AutoModel`                          | 기본 모델 (output: hidden states) | `BertModel`, `T5Model`, `GPT2Model`, ...                                 |
+| `AutoModelForSequenceClassification` | 문장 분류 모델                      | `BertForSequenceClassification`, `RoBERTaForSequenceClassification`, ... |
+| `AutoModelForCausalLM`               | 언어 생성 모델 (GPT류)               | `GPT2LMHeadModel`, `LlamaForCausalLM`, ...                               |
+| `AutoModelForMaskedLM`               | MLM 모델 (BERT류)                | `BertForMaskedLM`, ...                                                   |
+| `AutoProcessor`                      | 멀티모달 입력 처리기                   | `WhisperProcessor`, `CLIPProcessor`, ...                                 |
+
