@@ -51,4 +51,13 @@
 
   - 모델 출력 후 디코딩 지원 (tokenizer.decode)
 
+
+요약
+
+| 클래스                | 역할             | 저장/불러오기 파일                      | 예시 클래스                                    |
+| ------------------ | -------------- | ------------------------------- | ----------------------------------------- |
+| `PretrainedConfig` | 모델의 구조/하이퍼파라미터 | `config.json`                   | `BertConfig`, `T5Config`                  |
+| `PreTrainedModel`  | 실제 신경망 + 가중치   | `pytorch_model.bin`             | `BertModel`, `T5ForConditionalGeneration` |
+| `Preprocessor`     | 입력 데이터 전처리기    | `tokenizer.json`, `vocab.txt` 등 | `AutoTokenizer`, `WhisperProcessor`       |
+
 ---
