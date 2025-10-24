@@ -8,6 +8,12 @@
 
 모든 Hugging Face 객체(Config, Tokenizer, Model, Processor)가 공통으로 가지는 클래스 메서드
 
+- device_map="auto"는 모델 가중치를 가장 빠른 장치에 우선적으로 자동 할당
+
+- dtype="auto"는 모델 가중치를 저장된 데이터 유형으로 직접 초기화하여 가중치를 두 번 로드하는 것을 방지(PyTorch는 기본적으로 torch.float32로 가중치를 로드)
+
+
+
 ---
 
 ## class 정리
