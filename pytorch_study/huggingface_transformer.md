@@ -12,7 +12,31 @@
 
 - dtype="auto"는 모델 가중치를 저장된 데이터 유형으로 직접 초기화하여 가중치를 두 번 로드하는 것을 방지(PyTorch는 기본적으로 torch.float32로 가중치를 로드)
 
+---
 
+### `tokenizer(...)`
+
+PreTrainedTokenizerBase 클래스의 __call__() 메서드 오버라이드
+
+내부적으로 encode_plus()를 호출해서 문자열 → 토큰 ID / attention mask 딕셔너리 생성
+
+return_tensors="pt" -> 출력 형식, PyTorch 텐서(torch.Tensor)
+
+"pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
+
+### `model.generate(...)`
+
+GenerationMixin 클래스에서 정의된 공통 메서드
+
+입력(input_ids, attention_mask)을 받아 자동 반복(inference loop) 수행
+
+내부적으로 forward() → logits → 다음 토큰 샘플링을 반복
+
+### `tokenizer.batch_decode()`
+
+PreTrainedTokenizerBase 클래스의 메서드
+
+모델이 생성한 토큰 ID 시퀀스를 문자열로 복원
 
 ---
 
