@@ -193,3 +193,13 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 자동화: 태스크에 맞는 기본 전처리/후처리를 붙이고, PyTorch/TF 자동 감지, GPU/CPU 디바이스 설정도 간편.
 
 커스텀: 필요하면 직접 로드한 model, tokenizer, feature_extractor, processor를 끼워넣을 수 있음.
+
+---
+
+### `DataCollatorWithPadding`
+
+배치(batch)를 만들 때, 각 문장의 길이를 확인하고 그중 가장 긴 문장에 맞춰 동적으로 패딩을 넣어줌
+
+문장 전체가 아니라 배치 단위로 패딩 길이를 다르게 맞춰주는 객체
+
+함수처럼 호출하는 형태로 사용
