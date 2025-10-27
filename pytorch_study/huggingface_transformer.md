@@ -20,9 +20,7 @@ PreTrainedTokenizerBase 클래스의 __call__() 메서드 오버라이드
 
 내부적으로 encode_plus()를 호출해서 문자열 → 토큰 ID / attention mask 딕셔너리 생성
 
-return_tensors="pt" -> 출력 형식, PyTorch 텐서(torch.Tensor)
-
-"pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
+return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
 ### `model.generate(...)`
 
