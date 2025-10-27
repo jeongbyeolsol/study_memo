@@ -184,6 +184,7 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 | `gradient_accumulation_steps` | 그래디언트 누적                             | `4`                         |
 | `lr_scheduler_type`           | 학습률 스케줄러                             | `"linear"`, `"cosine"`, ... |
 
+---
 
 ### [`pipeline`](https://huggingface.co/docs/transformers/main_classes/pipelines)
 
