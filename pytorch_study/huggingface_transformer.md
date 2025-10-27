@@ -36,6 +36,12 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
 ---
 
+### [`infer_device()`](https://huggingface.co/docs/transformers/v4.57.1/en/internal/file_utils#transformers.infer_device)
+
+현재 사용 가능한 GPU/CPU 디바이스를 자동으로 감지해주는 함수
+
+---
+
 ## class 정리
 
 *Each pretrained model inherits from three base classes*
@@ -111,3 +117,78 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 | `AutoModelForMaskedLM`               | MLM 모델 (BERT류)                | `BertForMaskedLM`, ...                                                   |
 | `AutoProcessor`                      | 멀티모달 입력 처리기                   | `WhisperProcessor`, `CLIPProcessor`, ...                                 |
 
+---
+
+### `BitsAndBytesConfig`
+
+transformers 라이브러리에서 bitsandbytes 기반의 양자화 설정을 캡슐화한 클래스
+
+세 가지 층위로 양자화의 세부 동작을 제어
+
+  - 가중치 로딩 방식 (8bit / 4bit / full precision)
+  - 계산 시 데이터 타입 (float16, bfloat16, float32 등)
+  - 양자화 세부 방식 (NF4, FP4, double quantization 등)
+
+주요 파라미터 정리
+
+| 속성명                         | 타입          | 설명                    | 예시 / 추천                                 |
+| --------------------------- | ----------- | --------------------- | --------------------------------------- |
+| `load_in_8bit`              | bool        | 8비트 양자화 활성화           | `True`                                  |
+| `load_in_4bit`              | bool        | 4비트 양자화 활성화           | `True`                                  |
+| `bnb_4bit_quant_type`       | str         | 4비트 양자화 방식 선택         | `"nf4"` (Normalized Float 4) or `"fp4"` |
+| `bnb_4bit_compute_dtype`    | torch.dtype | 연산 시 사용 dtype         | `torch.float16`, `torch.bfloat16`       |
+| `bnb_4bit_use_double_quant` | bool        | 2단계 양자화 사용            | `True` (VRAM 절약↑)                       |
+| `llm_int8_threshold`        | float       | 8bit 변환 시 예외처리 기준     | 기본 `6.0` (threshold↑ → 정확도↑, 메모리↓)      |
+| `llm_int8_has_fp16_weight`  | bool        | 일부 가중치를 FP16으로 유지     | `True` (mixed precision)                |
+| `llm_int8_skip_modules`     | list        | 양자화 제외할 모듈 이름         | `["lm_head"]` 등                         |
+| `bnb_4bit_quant_storage`    | torch.dtype | 양자화된 값 저장 포맷          | `torch.uint8` (기본)                      |
+| `tpu_vm_mode`               | bool        | TPU 환경용 (일반적으로 False) | `False`                                 |
+
+---
+
+### [`Trainer`](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/trainer#api-reference%20][%20transformers.Trainer)
+
+**훈련 루프(Training Loop)**\의 고수준 클래스
+
+주요 구성 요소
+| 구성                               | 역할                             |
+| -------------------------------- | ------------------------------ |
+| `model`                          | 학습시킬 모델 객체 (`AutoModelFor*`)   |
+| `args`                           | `TrainingArguments` (훈련 설정)    |
+| `train_dataset` / `eval_dataset` | `datasets` 형태의 데이터셋            |
+| `tokenizer`                      | (선택) 토크나이저, 자동 패딩/디코딩          |
+| `compute_metrics`                | (선택) 평가 지표 함수 (accuracy, F1 등) |
+| `data_collator`                  | (선택) 배치 구성 로직 (패딩, 마스크 등)      |
+
+
+
+### [`TrainingArguments`](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/trainer#transformers.TrainingArguments)
+
+Trainer: 실제 학습 진행 담당
+
+TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
+
+주요 옵션
+
+| 인자                            | 설명                                   | 예시                          |
+| ----------------------------- | ------------------------------------ | --------------------------- |
+| `output_dir`                  | 체크포인트 저장 폴더                          | `"./results"`               |
+| `num_train_epochs`            | 학습 epoch 수                           | `3`                         |
+| `per_device_train_batch_size` | 배치 크기                                | `8`                         |
+| `learning_rate`               | 학습률                                  | `2e-5`                      |
+| `weight_decay`                | 가중치 감쇠                               | `0.01`                      |
+| `logging_dir`                 | TensorBoard 로그 저장 위치                 | `"./logs"`                  |
+| `evaluation_strategy`         | 평가 시점 (`"no"`, `"steps"`, `"epoch"`) | `"epoch"`                   |
+| `save_strategy`               | 저장 주기 (`"steps"`, `"epoch"`)         | `"epoch"`                   |
+| `fp16`                        | half precision 훈련                    | `True`                      |
+| `gradient_accumulation_steps` | 그래디언트 누적                             | `4`                         |
+| `lr_scheduler_type`           | 학습률 스케줄러                             | `"linear"`, `"cosine"`, ... |
+
+
+### [`pipeline`](https://huggingface.co/docs/transformers/main_classes/pipelines)
+
+역할: 모델+토크나이저+전처리/후처리를 묶어 한 줄로 추론하게 해주는 고수준 래퍼.
+
+자동화: 태스크에 맞는 기본 전처리/후처리를 붙이고, PyTorch/TF 자동 감지, GPU/CPU 디바이스 설정도 간편.
+
+커스텀: 필요하면 직접 로드한 model, tokenizer, feature_extractor, processor를 끼워넣을 수 있음.
