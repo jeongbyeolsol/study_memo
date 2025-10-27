@@ -16,7 +16,7 @@
 
 ### `tokenizer(...)`
 
-PreTrainedTokenizerBase 클래스의 __call__() 메서드 오버라이드
+`PreTrainedTokenizerBase` 클래스의 `__call__()` 메서드 오버라이드
 
 내부적으로 encode_plus()를 호출해서 문자열 → 토큰 ID / attention mask 딕셔너리 생성
 
@@ -24,7 +24,7 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
 ### `model.generate(...)`
 
-GenerationMixin 클래스에서 정의된 공통 메서드
+`GenerationMixin` 클래스에서 정의된 공통 메서드
 
 입력(input_ids, attention_mask)을 받아 자동 반복(inference loop) 수행
 
@@ -32,7 +32,7 @@ GenerationMixin 클래스에서 정의된 공통 메서드
 
 ### `tokenizer.batch_decode()`
 
-PreTrainedTokenizerBase 클래스의 메서드
+`PreTrainedTokenizerBase` 클래스의 메서드
 
 모델이 생성한 토큰 ID 시퀀스를 문자열로 복원
 
