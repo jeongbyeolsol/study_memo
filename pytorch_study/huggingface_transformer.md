@@ -117,7 +117,7 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 | `AutoModelForMaskedLM`               | MLM 모델 (BERT류)                | `BertForMaskedLM`, ...                                                   |
 | `AutoProcessor`                      | 멀티모달 입력 처리기                   | `WhisperProcessor`, `CLIPProcessor`, ...                                 |
 
-  - “기본 모델”이란, 사전학습(pretrained)된 Transformer의 “언어 이해/표현” 부분만을 로드한 모델
+  - “기본 모델”이란, 사전학습(pretrained)된 Transformer의 “언어 이해/표현(인코딩)” 부분만을 로드한 모델
 
 ---
 
