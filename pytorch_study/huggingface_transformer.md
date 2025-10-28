@@ -12,6 +12,11 @@
 
 - dtype="auto"는 모델 가중치를 저장된 데이터 유형으로 직접 초기화하여 가중치를 두 번 로드하는 것을 방지(PyTorch는 기본적으로 torch.float32로 가중치를 로드)
 
+
+### [`save_pretrained`](https://huggingface.co/docs/transformers/v4.57.1/ko/main_classes/model#transformers.PreTrainedModel.save_pretrained)
+
+모델 클래스안에 정의된, 모델 또는 토크나이저 객체를 로컬 디렉터리에 저장하는 메서드
+
 ---
 
 ### `tokenizer(...)`
