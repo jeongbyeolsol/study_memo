@@ -111,7 +111,7 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 | AutoClass 이름                         | 로드하는 대상                       | 내부에서 로드되는 실제 클래스                                                         |
 | ------------------------------------ | ----------------------------- | ------------------------------------------------------------------------ |
 | `AutoTokenizer`                      | 토크나이저                         | `BertTokenizer`, `GPT2Tokenizer`, ...                                    |
-| `AutoModel`                          | 기본 모델 (output: hidden states) | `BertModel`, `T5Model`, `GPT2Model`, ...                                 |
+| [`AutoModel`](https://huggingface.co/docs/transformers/v4.57.1/en/model_doc/auto#transformers.AutoModel)                          | 기본 모델 (output: hidden states) | `BertModel`, `T5Model`, `GPT2Model`, ...                                 |
 | `AutoModelForSequenceClassification` | 문장 분류 모델                      | `BertForSequenceClassification`, `RoBERTaForSequenceClassification`, ... |
 | `AutoModelForCausalLM`               | 언어 생성 모델 (GPT류)               | `GPT2LMHeadModel`, `LlamaForCausalLM`, ...                               |
 | `AutoModelForMaskedLM`               | MLM 모델 (BERT류)                | `BertForMaskedLM`, ...                                                   |
