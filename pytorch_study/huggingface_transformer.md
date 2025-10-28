@@ -258,6 +258,34 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 
 함수처럼 호출하는 형태로 사용
 
+
+---
+
+### `PreTrainedTokenizerBase`
+
+Transformers 라이브러리의 모든 토크나이저(tokenizer)들의 기반(Base) 클래스
+
+핵심 메서
+
+1. `__call__()`: 문자열을 토큰화 + 인덱스화 + 패딩까지 한 번에 수행
+
+2. `encode()` / `decode(ids)`: 문자열을 토큰 ID 리스트로 변환 / 토큰 ID 리스트를 다시 문자열로 복원
+
+3. `batch_encode_plus()`: 문장 여러 개를 한 번에 처리하는 함수 (batch input용)
+
+4. `save_pretrained()` / `from_pretrained()`: 모델 토크나이저를 저장/불러오기 위한 표준 메서드→ 모델과 동일한 경로 구조 유지 가능
+
+5. `convert_tokens_to_ids()` / `convert_ids_to_tokens()`: 문자열 토큰 ↔ 정수 ID 변환
+
+| 속성 이름                                                          | 설명                                                |
+| -------------------------------------------------------------- | ------------------------------------------------- |
+| `vocab_size`                                                   | 토크나이저 어휘 크기                                       |
+| `pad_token_id`, `cls_token_id`, `sep_token_id`, `eos_token_id` | 특수 토큰 ID                                          |
+| `padding_side`                                                 | `"left"` or `"right"`                             |
+| `truncation_side`                                              | 문장 자를 때 방향                                        |
+| `model_input_names`                                            | 모델이 요구하는 입력 이름 (예: `input_ids`, `attention_mask`) |
+| `is_fast`                                                      | fast tokenizer인지 여부                               |
+
 ---
 
 ## 모듈 정리
