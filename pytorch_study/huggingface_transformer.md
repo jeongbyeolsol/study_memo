@@ -28,6 +28,20 @@
 
 **“shard”**: 거대한 모델 가중치 파일을 여러 개로 쪼갠 “조각 파일(piece file)” 단위
 
+### [`save_pretrained()`](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/model#transformers.PreTrainedModel.save_pretrained)
+
+모델의 가중치, 설정(config), 그리고 추가 메타데이터를 로컬 폴더에 저장 → 나중에 from_pretrained()으로 그대로 복원할 수 있게 만들어주는 함수
+
+| 인자                   | 설명                                  |
+| -------------------- | ----------------------------------- |
+| `save_directory`     | 저장할 폴더 경로                           |
+| `safe_serialization` | `.safetensors` 포맷으로 저장 (보안 + 속도 향상) |
+| `max_shard_size`     | 너무 큰 모델을 일정 단위로 나눠서 저장              |
+| `state_dict`         | 수동으로 지정한 파라미터 dict만 저장할 때 사용        |
+| `push_to_hub`        | Hugging Face Hub에 바로 업로드            |
+| `is_main_process`    | 멀티GPU 환경에서 주 프로세스만 저장하도록 제어         |
+
+
 ---
 
 ### `tokenizer(...)`
