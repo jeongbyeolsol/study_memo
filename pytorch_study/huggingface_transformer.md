@@ -13,9 +13,20 @@
 - dtype="auto"는 모델 가중치를 저장된 데이터 유형으로 직접 초기화하여 가중치를 두 번 로드하는 것을 방지(PyTorch는 기본적으로 torch.float32로 가중치를 로드)
 
 
-### [`save_pretrained`](https://huggingface.co/docs/transformers/v4.57.1/ko/main_classes/model#transformers.PreTrainedModel.save_pretrained)
+### [`save_pretrained`](https://huggingface.co/docs/transformers/v4.57.1/eo/main_classes/model#transformers.PreTrainedModel.save_pretrained)
 
 모델 클래스안에 정의된, 모델 또는 토크나이저 객체를 로컬 디렉터리에 저장하는 메서드
+
+| 인자                   | 설명                                             |
+| -------------------- | ---------------------------------------------- |
+| `save_directory`     | 저장할 디렉터리 경로                                    |
+| `safe_serialization` | `True`일 경우 `.safetensors` 포맷으로 저장              |
+| `state_dict`         | 특정 파라미터 dict만 저장하도록 지정                         |
+| `push_to_hub`        | True면 Hugging Face Hub에 바로 업로드                 |
+| `max_shard_size`     | 너무 큰 모델을 여러 shard로 나눠 저장할 때 크기 지정 (예: `"5GB"`) |
+
+
+**“shard”**: 거대한 모델 가중치 파일을 여러 개로 쪼갠 “조각 파일(piece file)” 단위
 
 ---
 
