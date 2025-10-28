@@ -148,7 +148,8 @@ x_final = x_embedding + x_positional
    - 과거에는 Word2Vec, GloVe, fastText처럼 트랜스포머와 별개로 학습된 임베딩을 불러와서 초기화하는 방법을 많이 사용함
    - 학습 초반에 의미 공간이 이미 잘 잡혀 있어서 수렴이 빠르거나, 데이터가 적어도 성능이 좋음
    - 현대에는 잘 않쓴다고 함
-   
+
+---
 
 # MoE
 
@@ -171,3 +172,15 @@ MoE의 핵심은 **“희소한 활성화(Sparse Activation)”**
 **목표는 연산량을 폭발적으로 늘리지 않고도 “훨씬 큰 모델(거대한 FFN)”을 흉내 내는 것.**
 
 트랜스포머 블록 하나에 FFN을 64개 직렬로 쌓음 vs FFN 64개를 병렬로 준비, Expert(FFN)를 k개 선택
+
+
+# LoRA (Low-Rank Adaptation)
+
+기존 모델의 모든 가중치를 바꾸지 않고, 일부 레이어(보통 Linear Layer)에 작은 “보조 행렬”(low-rank matrix) 만 추가로 학습하는 방식
+
+y = Wx
+
+  ||
+  \/
+  
+y = (W + ΔW)x = Wx + AB^Tx
