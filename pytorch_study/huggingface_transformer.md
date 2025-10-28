@@ -12,6 +12,14 @@
 
 - dtype="auto"는 모델 가중치를 저장된 데이터 유형으로 직접 초기화하여 가중치를 두 번 로드하는 것을 방지(PyTorch는 기본적으로 torch.float32로 가중치를 로드)
 
+| 핵심 기능   | 인자                                                    | 설명              |
+| ------- | ----------------------------------------------------- | --------------- |
+| 모델 지정   | `pretrained_model_name_or_path`                       | 모델 이름 또는 경로     |
+| 메모리 최적화 | `low_cpu_mem_usage`, `device_map`, `torch_dtype`      | 대형 모델 로드 시 필수   |
+| 양자화     | `quantization_config`, `load_in_8bit`, `load_in_4bit` | bitsandbytes 설정 |
+| 보안/포맷   | `use_safetensors`, `trust_remote_code`                | 포맷/코드 로드 제어     |
+| 기타      | `cache_dir`, `revision`, `offload_folder`             | 세부 제어용          |
+
 
 ### [`save_pretrained`](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/model#transformers.PreTrainedModel.save_pretrained)
 
