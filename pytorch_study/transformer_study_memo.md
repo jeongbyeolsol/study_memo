@@ -174,7 +174,7 @@ MoE의 핵심은 **“희소한 활성화(Sparse Activation)”**
 트랜스포머 블록 하나에 FFN을 64개 직렬로 쌓음 vs FFN 64개를 병렬로 준비, Expert(FFN)를 k개 선택
 
 
-# LoRA (Low-Rank Adaptation)
+## LoRA (Low-Rank Adaptation)
 
 기존 모델의 모든 가중치를 바꾸지 않고, 일부 레이어(보통 Linear Layer)에 작은 “보조 행렬”(low-rank matrix) 만 추가로 학습하는 방식
 
@@ -184,3 +184,41 @@ y = Wx
   \/
   
 y = (W + ΔW)x = Wx + AB^Tx
+
+# 토크나이저(tokenizer) 알고리즘
+
+## Byte-Pair Encoding (BPE)
+
+자주 등장하는 문자 쌍(Byte pair) 을 반복적으로 병합(merge)해서 점점 더 긴 서브워드 단위를 만들어
+
+1. 초기 단계: 모든 단어를 문자 단위로 쪼갬
+2. 빈도 계산: 데이터 전체에서 가장 자주 등장하는 문자 쌍 찾기
+3. 병합(merge): 그 문자 쌍을 하나의 새로운 토큰으로 결합
+4. 반복: 정해진 횟수(merge operations 수)만큼 반복해서 새로운 단위를 추가
+
+결국 자주 등장하는 단어(lower, lowest)는 하나의 토큰이 되고, 드문 단어(loyalty)는 여러 서브워드로 나뉨
+
+## WordPiece
+
+“언어 모델 확률(likelihood)”을 기준으로 병합을 결정 -> 정보 이득(information gain) 이 높은 조합을 선택
+
+>단순히 자주 등장하는 문자쌍이 아니라,
+>
+>“새로 만든 서브워드가 언어 모델 확률을 얼마나 올려주는가”를 기준으로 병합
+
+score(a, b) = P(ab) / P(a)P(b)
+
+
+## SentencePiece (Unigram Model)
+
+>“공백도 하나의 학습 가능한 기호(space token)”로 취급해서
+>
+>영어, 일본어, 한국어, 중국어 등 어떤 언어에도 적용 가능하게 설계
+
+1. 초기 어휘집(vocab) 을 무작위로 생성 (수천~수만 개)
+
+2. Unigram Language Model을 학습 → 각 서브워드의 확률을 계산
+
+3. 불필요한 서브워드 제거(pruning): 어떤 서브워드를 빼도 성능(확률)이 거의 떨어지지 않으면 삭제
+
+4. 최종적으로 가장 효율적인 서브워드 집합만 남김
