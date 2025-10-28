@@ -203,3 +203,17 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 문장 전체가 아니라 배치 단위로 패딩 길이를 다르게 맞춰주는 객체
 
 함수처럼 호출하는 형태로 사용
+
+---
+
+## 모듈 정리
+
+### `configuration.py`
+
+숨겨진 레이어 수, 어휘 크기, 활성화 함수 등과 같은 특정 속성을 정의
+
+### `modeling.py`
+
+각 레이어 내부에서 수행되는 레이어와 수학적 연산을 정의
+
+`modeling.py` 파일은 `configuration.py`의 모델 속성을 받아 해당 모델을 구축
