@@ -1,4 +1,18 @@
-# huggingface
+# huggingface transformers
+
+## 핵심 철학
+
+1. 가능한 한 쉽고 빠르게 사용 가능하도록
+
+2. 사전훈련된 모델(pretrained models)을 이용해 현실적이고 최첨단(“state-of-the-art”) 성능을 낼 수 있도록
+
+핵심 클래스 단순화: 모델마다 너무 많은 사용자 대상 추상화(abstraction)를 두지 않고, 세 가지 표준 클래스만 배우면 대부분의 모델을 쓸 수 있도록 설계
+
+- Configuration (모델 구조 및 하이퍼파라미터)
+
+- Model (모델 자체)
+
+- Preprocessor/Tokenizer/Processor (입력-출력 전처리) 
 
 ## 함수/메서드 정리
 
