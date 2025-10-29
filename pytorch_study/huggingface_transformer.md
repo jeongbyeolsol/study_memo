@@ -264,6 +264,20 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 
 커스텀: 필요하면 직접 로드한 model, tokenizer, feature_extractor, processor를 끼워넣을 수 있음.
 
+```python
+from transformers import pipeline
+
+pipe = pipeline(
+    task,                 # "text-generation", "sentiment-analysis", "summarization", ...
+    model=None,           # 모델 이름 또는 로컬 경로 (없으면 태스크의 기본 모델)
+    tokenizer=None,       # 토크나이저 (생략 가능)
+    device=None,          # 0 또는 "cuda:0" (GPU), -1 (CPU)
+    framework=None,       # "pt" 또는 "tf" (대부분 자동 감지)
+    return_tensors=False, # True면 모델 프레임워크의 텐서 반환
+    **task_specific_kwargs
+)
+```
+
 ---
 
 ### `DataCollatorWithPadding`
