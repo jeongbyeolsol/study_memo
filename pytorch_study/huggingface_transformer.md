@@ -278,6 +278,42 @@ pipe = pipeline(
 )
 ```
 
+| 매개변수                                        | 자료형                            | 설명                                                                                                                                                                                   |
+| ------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`task`**                                  | `str`                          | 사용할 태스크 이름. 예: `"text-generation"`, `"sentiment-analysis"`, `"summarization"`, `"translation"`, `"question-answering"`, `"image-classification"`, `"automatic-speech-recognition"` 등 |
+| **`model`**                                 | `str` or `PreTrainedModel`     | 사용할 모델의 이름(Hugging Face Hub ID) 또는 로컬 경로. 지정하지 않으면 해당 태스크의 기본 모델 사용                                                                                                                  |
+| **`tokenizer`**                             | `PreTrainedTokenizer` or `str` | 사용할 토크나이저. 생략 시 자동으로 모델에 맞는 토크나이저 불러옴                                                                                                                                                |
+| **`feature_extractor`**                     | `FeatureExtractor`             | 이미지·음성 태스크용 전처리기 (예: `WhisperFeatureExtractor`)                                                                                                                                      |
+| **`device`**                                | `int` or `str`                 | 연산 장치. `-1`=CPU, `0`=`cuda:0`, `1`=`cuda:1`                                                                                                                                          |
+| **`framework`**                             | `"pt"` or `"tf"`               | PyTorch 또는 TensorFlow. 기본값은 자동 감지                                                                                                                                                    |
+| **`revision`**                              | `str`                          | 모델 저장소의 특정 브랜치·커밋·태그 지정                                                                                                                                                              |
+| **`torch_dtype`**                           | `torch.dtype`                  | 모델을 불러올 때 사용할 dtype (`torch.float16`, `torch.bfloat16`, `torch.float32`, `"auto"`)                                                                                                   |
+| **`trust_remote_code`**                     | `bool`                         | 모델 저장소에 커스텀 코드(`modeling_*.py`)가 있을 때 신뢰하고 불러올지 여부                                                                                                                                   |
+| **`return_tensors`**                        | `str`                          | `"pt"`, `"tf"`, `"np"` 중 하나. 결과를 텐서로 반환할지 결정                                                                                                                                         |
+| **`batch_size`**                            | `int`                          | 입력 배치 크기. 다중 입력 시 내부적으로 병렬 처리 크기                                                                                                                                                     |
+| **`padding`**                               | `bool` or `str`                | 입력 길이 맞추기: `"max_length"`, `"longest"`, `True` 등                                                                                                                                     |
+| **`truncation`**                            | `bool` or `str`                | 긴 문장 잘라내기: `True`, `"only_first"`, `"only_second"`                                                                                                                                   |
+| **`max_length`**                            | `int`                          | 토큰 최대 길이                                                                                                                                                                             |
+| **`top_k`**, **`top_p`**, **`temperature`** | `float`                        | 생성형 모델용 확률 샘플링 파라미터                                                                                                                                                                  |
+| **`max_new_tokens`**                        | `int`                          | 생성 시 새로 생성할 최대 토큰 수                                                                                                                                                                  |
+| **`num_return_sequences`**                  | `int`                          | 생성 결과 개수                                                                                                                                                                             |
+| **`do_sample`**                             | `bool`                         | True면 샘플링, False면 그리디 탐색(greedy decoding)                                                                                                                                            |
+| **`return_full_text`**                      | `bool`                         | 생성 결과에 입력 프롬프트를 포함할지 여부                                                                                                                                                              |
+| **`handle_impossible_answer`**              | `bool`                         | QA 태스크에서 답이 없을 때 빈 문자열로 반환할지 여부                                                                                                                                                      |
+| **`top_k` (classification)**                | `int`                          | 분류 태스크에서 상위 k개 결과만 반환                                                                                                                                                                |
+
+| 태스크                              | 추가 인자                                                                                                        | 설명                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| **text-generation**              | `max_new_tokens`, `temperature`, `top_k`, `top_p`, `num_return_sequences`, `do_sample`, `repetition_penalty` | 텍스트 생성 제어                                        |
+| **summarization**                | `max_length`, `min_length`, `truncation`, `num_beams`                                                        | 요약 길이 및 탐색 범위                                    |
+| **translation**                  | `max_length`, `num_beams`, `forced_bos_token_id`                                                             | 번역 설정                                            |
+| **question-answering**           | `top_k`, `max_answer_len`, `handle_impossible_answer`                                                        | 정답 후보 개수, 최대 길이                                  |
+| **text-classification**          | `top_k`, `function_to_apply`, `aggregation_strategy`                                                         | 상위 라벨 수, 확률 변환 함수                                |
+| **token-classification**         | `aggregation_strategy`                                                                                       | NER 등에서 엔티티 병합 방식 (`simple`, `first`, `average`) |
+| **image-classification**         | `top_k`                                                                                                      | 상위 k개 라벨                                         |
+| **automatic-speech-recognition** | `chunk_length_s`, `stride_length_s`, `return_timestamps`                                                     | 오디오 분할 및 타임스탬프 반환                                |
+
+
 ---
 
 ### `DataCollatorWithPadding`
