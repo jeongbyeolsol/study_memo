@@ -278,6 +278,15 @@ pipe = pipeline(
 )
 ```
 
+속성
+
+```python
+pipe.model        # 실제 모델 (AutoModel 계열)
+pipe.tokenizer    # 토크나이저
+pipe.feature_extractor  # (이미지/음성용) 전처리기
+pipe.device       # GPU/CPU 정보
+```
+
 | 구분            | 매개변수                       | 설명                                                                                          |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------------------- |
 | **태스크 선택** | `task`                     | 수행할 작업 (예: `"text-generation"`, `"summarization"`, `"translation"`, `"sentiment-analysis"`) |
