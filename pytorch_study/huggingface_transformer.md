@@ -74,6 +74,22 @@
 
 return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
+padding 옵션
+
+| 값              | 설명                                  |
+| -------------- | ----------------------------------- |
+| `False` (기본값)  | 패딩 안 함 (문장마다 길이 다름)                 |
+| `"longest"` / `True`   | 배치(batch) 내 **가장 긴 문장 길이**에 맞춰 패딩   |
+| `"max_length"` | 지정한 `max_length` 길이에 맞춰 패딩          |
+
+truncation 옵션
+
+| 값                                | 설명                               |
+| -------------------------------- | -------------------------------- |
+| `False` (기본값)                    | 아무 것도 자르지 않음                     |
+| `True` / `"longest_first"`     | `max_length` 기준으로 초과된 부분 잘라냄  / `max_length`이 주어지지 않을 경우, 모델에서 허용되는 최대 길이로 잘라냄  |
+| `"only_first"` / `"only_second"` | 문장쌍 입력일 때 한쪽만 자름 (`max_length` 기준 초과 부분 잘라냄  / `max_length` 없는 경우 허용되는 최대 길이로 잘라냄  )                |
+
 ### `model.generate(...)`
 
 `GenerationMixin` 클래스에서 정의된 공통 메서드
