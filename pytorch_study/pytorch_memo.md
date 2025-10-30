@@ -50,6 +50,8 @@ torch
     - `torch.cuda.is_available()`
     - `torch.cuda.empty_cache()`
     - `torch.cuda.amp` → 자동 혼합 정밀도 (FP16/FP32 혼합 연산)
+  
+---
 
 ## PyTorch 학습 파이프라인 흐름
 1. **모델 구조 정의**
