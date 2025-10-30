@@ -2,6 +2,23 @@
 
 ---
 
+## torch 핵심 패키지 구조
+
+```
+torch
+├── nn              → 신경망 계층, 함수, 초기화
+├── autograd        → 자동 미분 엔진
+├── optim           → 최적화 알고리즘
+├── cuda            → GPU 관련 API
+├── distributed     → 분산 학습 기능
+├── fx              → 그래프 변환/시각화
+├── jit             → TorchScript (컴파일)
+├── onnx            → 모델 변환
+├── quantization    → 양자화
+├── utils           → 유틸 함수
+└── hub             → 미리 학습된 모델 관리
+```
+
 ## PyTorch 학습 파이프라인 흐름
 1. **모델 구조 정의**
   - `__init__`: 레이어(파라미터 포함) 선언
@@ -676,3 +693,32 @@ print(x.grad)  # tensor([4.])
  ```
 
 ---
+
+## torch 최상위 패키지 구조
+
+```
+torch/
+├── __init__.py
+├── _C/                 ← C++ core bindings (PyTorch 엔진)
+├── _utils.py
+├── _tensor.py
+├── nn/                 ← 신경망 관련 모듈
+├── autograd/           ← 자동 미분 시스템
+├── optim/              ← 최적화(Optimizer) 알고리즘
+├── utils/              ← 유틸리티 함수 (data, hooks, benchmarks 등)
+├── cuda/               ← GPU / CUDA 관련 함수
+├── distributed/        ← 분산 학습 (DDP, RPC, Tensor Parallel 등)
+├── multiprocessing/    ← 멀티프로세싱 지원
+├── fx/                 ← 그래프 트레이싱(모델 시각화/변형용)
+├── jit/                ← TorchScript (Python→C++ 그래프 컴파일)
+├── onnx/               ← ONNX export 지원
+├── quantization/       ← 양자화(Quantization)
+├── sparse/             ← 희소 텐서 연산
+├── storage/            ← Tensor Storage 구조체
+├── tensor/             ← Tensor 생성 및 조작 로직
+├── utils/
+├── functional.py       ← 수학/행렬 연산 함수들
+├── serialization.py    ← 모델 저장(load/save)
+└── hub.py              ← Torch Hub (모델 허브)
+
+```
