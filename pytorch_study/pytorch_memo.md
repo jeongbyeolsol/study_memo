@@ -18,6 +18,38 @@ torch
 ├── utils           → 유틸 함수
 └── hub             → 미리 학습된 모델 관리
 ```
+### 최중요 6개 패키지
+
+1. **torch (루트 네임스페이스)**
+    - 핵심 개념: 텐서(Tensor)”와 “연산(operation)
+    
+2. **torch.nn — 신경망(NN) 레이어와 구조**
+    - 핵심 개념: 모듈로 모델 구성하기
+    - `torch.nn.modules` → `Linear`, `Conv2d`, `LSTM`, `BatchNorm` 등
+    - `torch.nn.functional` → `relu`, `softmax`, `cross_entropy`
+    - `torch.nn.init` → 가중치 초기화
+  
+3. **torch.optim — Optimizer (가중치 업데이트)**
+    - 핵심 개념: “역전파로 나온 gradient를 이용해 파라미터 갱신하기”
+    - `torch.optim.Optimizer` → 모든 옵티마이저의 부모
+    - 하위 구현체: `optim.SGD`, `optim.Adam`, `optim.RMSprop`, `optim.Adagrad`
+    - `torch.optim.lr_scheduler` → 학습률 조정
+      
+4.  **torch.autograd — 자동 미분**
+    - 핵심 개념: 연산 그래프(Computational Graph)
+    - `requires_grad=True`로 만든 텐서의 연산은 모두 그래프로 기록되 `backward()`를 호출하면 미분이 자동으로 계산
+    - `torch.no_grad()` → 학습 비활성화 (inference 시 사용)
+      
+5. **torch.utils.data — 데이터 관리**
+    - 핵심 개념: “데이터셋 + 데이터로더”
+    - `torch.utils.data.Dataset` — 데이터 정의
+    - `torch.utils.data.DataLoader` — 배치 단위로 불러오기, 멀티스레딩 지원
+
+6. **torch.cuda — GPU 제어**
+    - 핵심 개념: “디바이스를 GPU로 이동시켜 연산 가속”
+    - `torch.cuda.is_available()`
+    - `torch.cuda.empty_cache()`
+    - `torch.cuda.amp` → 자동 혼합 정밀도 (FP16/FP32 혼합 연산)
 
 ## PyTorch 학습 파이프라인 흐름
 1. **모델 구조 정의**
