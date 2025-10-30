@@ -40,7 +40,7 @@ torch
       
 ### 4.  **torch.autograd — 자동 미분**
   - 핵심 개념: 연산 그래프(Computational Graph)
-  - `requires_grad=True`로 만든 텐서의 연산은 모두 그래프로 기록되 `backward()`를 호출하면 미분이 자동으로 계산
+  - `requires_grad=True`로 만든 텐서의 연산은 모두 그래프로 기록되어 `backward()`를 호출하면 미분이 자동으로 계산
   - `torch.no_grad()` → 학습 비활성화 (inference 시 사용)
      
 ### 5. **torch.utils.data — 데이터 관리**
