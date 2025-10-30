@@ -22,6 +22,10 @@ torch
 
 1. **torch (루트 네임스페이스)**
     - 핵심 개념: 텐서(Tensor)”와 “연산(operation)
+    - 주요 함수: `torch.tensor(), torch.zeros(), torch.ones(), torch.randn(), torch.cat(), torch.stack()`
+    - 속성: `x.device, x.dtype, x.shape`
+    - 유틸: `torch.save(), torch.load(), torch.manual_seed()`
+
     
 2. **torch.nn — 신경망(NN) 레이어와 구조**
     - 핵심 개념: 모듈로 모델 구성하기
