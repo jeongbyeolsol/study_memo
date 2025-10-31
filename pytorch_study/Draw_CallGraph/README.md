@@ -43,3 +43,7 @@ torch.profiler는 PyTorch 연산의 실행 시간·메모리·커널을 추적�
 1. tracing파일을 다운받기
 2. chrome://tracing/을 크롬 주소창에 검색 (권한 허용이 필요할 수 있음)
 3. 좌측 상단에 Load를 눌러 tracing파일을 선택
+
+아래 이미지는 tracing파일을 간략하게 정리한것
+
+![simple_example_call_graph](https://github.com/jeongbyeolsol/study_memo/blob/main/pytorch_study/Draw_CallGraph/simple_example_call_graph.png)
