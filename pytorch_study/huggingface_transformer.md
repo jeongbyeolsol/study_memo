@@ -74,6 +74,18 @@
 
 return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
+| 옵션                          | 자주 쓰는 값                                | 설명                                           |
+| --------------------------- | -------------------------------------- | -------------------------------------------- |
+| **`add_special_tokens`**    | `True`                                 | 모델이 필요로 하는 `[CLS]`, `[SEP]`, `<BOS>` 등 자동 추가 |
+| **`padding`**               | `"max_length"` / `"longest"` / `False` | 시퀀스 길이를 맞춤 (배치 입력 시 중요)                      |
+| **`truncation`**            | `True`                                 | `max_length` 초과 시 잘라냄                        |
+| **`max_length`**            | `int`                                  | 최대 토큰 수 제한                                   |
+| **`return_tensors`**        | `"pt"` / `"tf"`                        | PyTorch나 TensorFlow 텐서로 반환                   |
+| **`return_attention_mask`** | `True`                                 | 패딩 구분용 마스크 (`1=실제토큰, 0=패딩`) 반환               |
+| **`is_split_into_words`**   | `True`                                 | 입력이 이미 띄어쓰기 단위 리스트일 경우 사용                    |
+| **`pad_to_multiple_of`**    | `8` / `16`                             | GPU 성능 최적화용 패딩 단위 맞춤                         |
+
+
 **padding=** 옵션
 
 | 값              | 설명                                  |
