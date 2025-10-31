@@ -29,7 +29,7 @@
 | 핵심 기능   | 인자                                                    | 설명              |
 | ------- | ----------------------------------------------------- | --------------- |
 | 모델 지정   | `pretrained_model_name_or_path`                       | 모델 이름 또는 경로     |
-| 메모리 최적화 | `low_cpu_mem_usage`, `device_map`, `torch_dtype`      | 대형 모델 로드 시 필수   |
+| 메모리 최적화 | `low_cpu_mem_usage`, `device_map`, `dtype`      | 대형 모델 로드 시 필수   |
 | 양자화     | `quantization_config`, `load_in_8bit`, `load_in_4bit` | bitsandbytes 설정 |
 | 보안/포맷   | `use_safetensors`, `trust_remote_code`                | 포맷/코드 로드 제어     |
 | 기타      | `cache_dir`, `revision`, `offload_folder`             | 세부 제어용          |
