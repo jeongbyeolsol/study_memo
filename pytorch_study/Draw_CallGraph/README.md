@@ -1,6 +1,4 @@
-1. tracing파일을 다운받기
-2. chrome://tracing/을 크롬 주소창에 검색 (권한 허용이 필요할 수 있음)
-3. 좌측 상단에 Load를 눌러 tracing파일을 선택
+# torch call graph
 
 ![call_graph](https://github.com/jeongbyeolsol/study_memo/blob/main/pytorch_study/Draw_CallGraph/torch_callgraph.png)
 
@@ -32,3 +30,12 @@ nn.Module (model) ── forward(x) ──► logits
 삼각형: 임의의 클래스
 
 동그라미: 함수, 메서드
+
+
+---
+
+### trace.json파일 보는법
+
+1. tracing파일을 다운받기
+2. chrome://tracing/을 크롬 주소창에 검색 (권한 허용이 필요할 수 있음)
+3. 좌측 상단에 Load를 눌러 tracing파일을 선택
