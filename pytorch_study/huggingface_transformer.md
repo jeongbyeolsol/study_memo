@@ -90,7 +90,7 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 | `True` / `"longest_first"`     | `max_length` 기준으로 초과된 부분 잘라냄  / `max_length`이 주어지지 않을 경우, 모델에서 허용되는 최대 길이로 잘라냄  |
 | `"only_first"` / `"only_second"` | 문장쌍 입력일 때 한쪽만 자름 (`max_length` 기준 초과 부분 잘라냄  / `max_length` 없는 경우 허용되는 최대 길이로 잘라냄  )                |
 
-### `model.generate(...)`
+### [`model.generate(...)`](https://huggingface.co/docs/transformers/v4.57.1/ko/main_classes/text_generation#transformers.GenerationMixin.generate)
 
 `GenerationMixin` 클래스에서 정의된 공통 메서드
 
@@ -318,7 +318,7 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 
 Hugging Face의 모든 태스크별 파이프라인(`TextGenerationPipeline`, `ImageClassificationPipeline` 등)의 Base Class
 
-직접 파이프라인을 만들 때, 이를 상속받아 만든 (`preprocess`: 전처리, `_forward`: 모델 추론, `postprocess`: 후처리, `_sanitize_parameters`: 파라미터 분리 을 필수로 구현)
+직접 파이프라인을 만들 때, 이를 상속받아 만든 (핵심 메서드 | `preprocess`: 전처리, `_forward`: 모델 추론, `postprocess`: 후처리, `_sanitize_parameters`: 파라미터 분리)
 
 주요 메서드
 | 메서드                      | 역할                                         |
