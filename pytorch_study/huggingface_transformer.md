@@ -150,6 +150,14 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
 모델이 생성한 토큰 ID 시퀀스를 문자열로 복원
 
+| 옵션                                  | 기본값     | 설명                                                                      |
+| ----------------------------------- | ------- | ----------------------------------------------------------------------- |
+| **`skip_special_tokens`**           | `False` | `<pad>`, `<bos>`, `<eos>` 같은 특수 토큰을 **출력에서 제거**할지 여부. 일반적으로 `True`로 설정. |
+| **`clean_up_tokenization_spaces`**  | `True`  | 토크나이저가 디코딩 후에 불필요한 공백(`"Hello , world" → "Hello, world"`)을 자동 정리할지 여부.  |
+| **`spaces_between_special_tokens`** | `True`  | 특수 토큰들 사이에 공백을 넣을지 여부 (보통 기본값 그대로 둡니다).                                 |
+| **`padding_side`** *(간접적)*          | -       | 왼쪽/오른쪽 패딩 위치에 따라 디코딩 결과가 다를 수 있으므로 주의 (옵션은 `tokenizer` 생성 시 설정).        |
+
+
 ---
 
 ### [`infer_device()`](https://huggingface.co/docs/transformers/v4.57.1/en/internal/file_utils#transformers.infer_device)
