@@ -54,7 +54,9 @@ torch
   - `torch.cuda.empty_cache()`
   - `torch.cuda.amp` → 자동 혼합 정밀도 (FP16/FP32 혼합 연산)
 
-
+#### 추가 `torch.profiler`
+  - torch.profiler는 PyTorch 연산의 실행 시간·메모리·커널을 추적해주는 성능 분석용 모듈이며, 내부적으로 전역 프로파일링 엔진을 제공한다
+    
 ### 1step의 거시적 흐름
 
 ```
