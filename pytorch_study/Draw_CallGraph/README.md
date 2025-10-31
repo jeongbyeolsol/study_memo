@@ -1,6 +1,6 @@
 # torch call graph
 
-![call_graph](,/images/torch_callgraph.png)
+![call_graph](./images/torch_callgraph.png)
 
 ### 거시적인 흐름의 1 step call graph
 ```
@@ -46,4 +46,4 @@ torch.profiler는 PyTorch 연산의 실행 시간·메모리·커널을 추적�
 
 아래 이미지는 tracing파일을 간략하게 정리한것
 
-![simple_example_call_graph](,/images/simple_example_call_graph.png)
+![simple_example_call_graph](./images/simple_example_call_graph.png)
