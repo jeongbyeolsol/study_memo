@@ -66,7 +66,7 @@
 
 ---
 
-### `tokenizer(...)`
+### [`tokenizer(...)`](https://huggingface.co/docs/transformers/main_classes/tokenizer#transformers.PreTrainedTokenizer.__call__)
 
 `PreTrainedTokenizerBase` 클래스의 `__call__()` 메서드 오버라이드
 
