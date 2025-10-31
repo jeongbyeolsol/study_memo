@@ -35,6 +35,22 @@
 | 기타      | `cache_dir`, `revision`, `offload_folder`             | 세부 제어용          |
 
 
+**토크나이저(AutoTokenizer.from_pretrained())호출 시 핵심 옵션**
+| 옵션                                  | 기본값      | 설명                                                      |
+| ----------------------------------- | -------- | ------------------------------------------------------- |
+| `pretrained_model_name_or_path` | —        | 모델 이름(HF Hub) 또는 로컬 경로                                  |
+| `cache_dir`                     | `None`   | 다운로드한 파일을 저장할 경로                                        |
+| `force_download`                | `False`  | 캐시가 있어도 다시 다운로드                                         |
+| `local_files_only`              | `False`  | 인터넷 접속 없이 로컬 캐시만 사용                                     |
+| `revision`                      | `"main"` | 특정 커밋/브랜치/태그 지정 (예: `"v4.57.1"`)                        |
+| `subfolder`                     | `None`   | 모델 리포 내 서브폴더에서 로드                                       |
+| `trust_remote_code`             | `False`  | 리모트 리포의 커스텀 토크나이저 코드를 신뢰할지 여부 *(True 필요할 때 있음)*         |
+| `use_fast`                      | `True`   | Rust 기반 fast tokenizer 사용 (`True` strongly recommended) |
+| `tokenizer_type`                | `None`   | 직접 토크나이저 타입 지정 시 (보통 자동 감지됨)                            |
+| `clean_up_tokenization_spaces`  | `True`   | 디코딩 시 불필요한 공백 자동 제거                                     |
+
+
+
 ### [`save_pretrained`](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/model#transformers.PreTrainedModel.save_pretrained)
 
 모델 클래스안에 정의된, 모델 또는 토크나이저 객체를 로컬 디렉터리에 저장하는 메서드
