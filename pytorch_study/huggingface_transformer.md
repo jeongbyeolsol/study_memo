@@ -318,7 +318,7 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 
 Hugging Face의 모든 태스크별 파이프라인(`TextGenerationPipeline`, `ImageClassificationPipeline` 등)의 Base Class
 
-직접 파이프라인을 만들 때, 이를 상속받아 만든 (preprocess, _forward, postprocess 및 _sanitize_parameters을 필수로 구현)
+직접 파이프라인을 만들 때, 이를 상속받아 만든 (`preprocess`, `_forward`, `postprocess`, `_sanitize_parameters`을 필수로 구현)
 
 주요 메서드
 | 메서드                      | 역할                                         |
