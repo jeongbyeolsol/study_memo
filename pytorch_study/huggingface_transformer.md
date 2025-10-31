@@ -353,6 +353,16 @@ Transformers 라이브러리의 모든 토크나이저(tokenizer)들의 기반(B
 
 ---
 
+### `KeyDataset`
+
+`transformers.pipelines.pt_utils` 모듈에 있는 클래스
+
+데이터셋(dict 또는 Dataset 객체) 에서 “특정 key”의 값만 뽑아서 iterable(반복 가능한) 형태로 넘겨주는 역할
+
+메모리에 한꺼번에 올리지 않고, 조금씩만 스트리밍 처리할 때 사용
+
+---
+
 ## 모듈 정리
 
 ### `configuration.py`
