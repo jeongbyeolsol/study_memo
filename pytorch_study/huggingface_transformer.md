@@ -110,6 +110,64 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
 ---
 
+### [`pipeline`](https://huggingface.co/docs/transformers/main_classes/pipelines)
+
+역할: 모델+토크나이저+전처리/후처리를 묶어 한 줄로 추론하게 해주는 고수준 래퍼.
+
+자동화: 태스크에 맞는 기본 전처리/후처리를 붙이고, PyTorch/TF 자동 감지, GPU/CPU 디바이스 설정도 간편.
+
+커스텀: 필요하면 직접 로드한 model, tokenizer, feature_extractor, processor를 끼워넣을 수 있음.
+
+```python
+from transformers import pipeline
+
+pipe = pipeline(
+    task,                 # "text-generation", "sentiment-analysis", "summarization", ...
+    model=None,           # 모델 이름 또는 로컬 경로 (없으면 태스크의 기본 모델)
+    tokenizer=None,       # 토크나이저 (생략 가능)
+    device=None,          # 0 또는 "cuda:0" (GPU), -1 (CPU)
+    framework=None,       # "pt" 또는 "tf" (대부분 자동 감지)
+    return_tensors=False, # True면 모델 프레임워크의 텐서 반환
+    **task_specific_kwargs
+)
+```
+
+속성
+
+```python
+pipe.model        # 실제 모델 (AutoModel 계열)
+pipe.tokenizer    # 토크나이저
+pipe.feature_extractor  # (이미지/음성용) 전처리기
+pipe.device       # GPU/CPU 정보
+```
+
+| 구분            | 매개변수                       | 설명                                                                                          |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------------------- |
+| **태스크 선택** | `task`                     | 수행할 작업 (예: `"text-generation"`, `"summarization"`, `"translation"`, `"sentiment-analysis"`) |
+| **모델 설정**  | `model`                    | 사용할 모델 이름 (ex. `"gpt2"`, `"bert-base-uncased"`)                                             |
+|               | `tokenizer`                | 모델에 맞는 토크나이저 (대부분 자동 선택, 따로 지정할 일 적음)                                                       |
+| **입력 처리**  | `padding`                  | 문장 길이를 맞춤 — `"max_length"` 또는 `"longest"`                                                   |
+|               | `truncation`               | 긴 문장을 자름 — `True`                                                                           |
+|               | `max_length`               | 입력 최대 길이 제한                                                                                 |
+| **장치 선택**  | `device`                   | CPU(`-1`), GPU(`0`) 선택                                                                      |
+| **생성 제어**  | `max_new_tokens`           | 생성 모델에서 새로 만들 토큰 수 제한                                                                       |
+|               | `do_sample`, `temperature` | 텍스트 생성 다양성 조절 (`do_sample=True`, `temperature=0.7` 추천)                                      |
+| **배치 처리**  | `batch_size`               | 여러 문장 처리 시 한 번에 넣을 크기                                                                       |
+
+
+| 태스크                              | 추가 인자                                                                                                        | 설명                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| **text-generation**              | `max_new_tokens`, `temperature`, `top_k`, `top_p`, `num_return_sequences`, `do_sample`, `repetition_penalty` | 텍스트 생성 제어                                        |
+| **summarization**                | `max_length`, `min_length`, `truncation`, `num_beams`                                                        | 요약 길이 및 탐색 범위                                    |
+| **translation**                  | `max_length`, `num_beams`, `forced_bos_token_id`                                                             | 번역 설정                                            |
+| **question-answering**           | `top_k`, `max_answer_len`, `handle_impossible_answer`                                                        | 정답 후보 개수, 최대 길이                                  |
+| **text-classification**          | `top_k`, `function_to_apply`, `aggregation_strategy`                                                         | 상위 라벨 수, 확률 변환 함수                                |
+| **token-classification**         | `aggregation_strategy`                                                                                       | NER 등에서 엔티티 병합 방식 (`simple`, `first`, `average`) |
+| **image-classification**         | `top_k`                                                                                                      | 상위 k개 라벨                                         |
+| **automatic-speech-recognition** | `chunk_length_s`, `stride_length_s`, `return_timestamps`                                                     | 오디오 분할 및 타임스탬프 반환                                |
+
+---
+
 ## class 정리
 
 *Each pretrained model inherits from three base classes*
@@ -256,61 +314,24 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 
 ---
 
-### [`pipeline`](https://huggingface.co/docs/transformers/main_classes/pipelines)
+### Pipeline
 
-역할: 모델+토크나이저+전처리/후처리를 묶어 한 줄로 추론하게 해주는 고수준 래퍼.
+Hugging Face의 모든 태스크별 파이프라인(`TextGenerationPipeline`, `ImageClassificationPipeline` 등)의 Base Class
 
-자동화: 태스크에 맞는 기본 전처리/후처리를 붙이고, PyTorch/TF 자동 감지, GPU/CPU 디바이스 설정도 간편.
+직접 파이프라인을 만들 때, 이를 상속받아 만든 (preprocess, _forward, postprocess 및 _sanitize_parameters을 필수로 구현)
 
-커스텀: 필요하면 직접 로드한 model, tokenizer, feature_extractor, processor를 끼워넣을 수 있음.
-
-```python
-from transformers import pipeline
-
-pipe = pipeline(
-    task,                 # "text-generation", "sentiment-analysis", "summarization", ...
-    model=None,           # 모델 이름 또는 로컬 경로 (없으면 태스크의 기본 모델)
-    tokenizer=None,       # 토크나이저 (생략 가능)
-    device=None,          # 0 또는 "cuda:0" (GPU), -1 (CPU)
-    framework=None,       # "pt" 또는 "tf" (대부분 자동 감지)
-    return_tensors=False, # True면 모델 프레임워크의 텐서 반환
-    **task_specific_kwargs
-)
-```
-
-속성
-
-```python
-pipe.model        # 실제 모델 (AutoModel 계열)
-pipe.tokenizer    # 토크나이저
-pipe.feature_extractor  # (이미지/음성용) 전처리기
-pipe.device       # GPU/CPU 정보
-```
-
-| 구분            | 매개변수                       | 설명                                                                                          |
-| ------------- | -------------------------- | ------------------------------------------------------------------------------------------- |
-| **태스크 선택** | `task`                     | 수행할 작업 (예: `"text-generation"`, `"summarization"`, `"translation"`, `"sentiment-analysis"`) |
-| **모델 설정**  | `model`                    | 사용할 모델 이름 (ex. `"gpt2"`, `"bert-base-uncased"`)                                             |
-|               | `tokenizer`                | 모델에 맞는 토크나이저 (대부분 자동 선택, 따로 지정할 일 적음)                                                       |
-| **입력 처리**  | `padding`                  | 문장 길이를 맞춤 — `"max_length"` 또는 `"longest"`                                                   |
-|               | `truncation`               | 긴 문장을 자름 — `True`                                                                           |
-|               | `max_length`               | 입력 최대 길이 제한                                                                                 |
-| **장치 선택**  | `device`                   | CPU(`-1`), GPU(`0`) 선택                                                                      |
-| **생성 제어**  | `max_new_tokens`           | 생성 모델에서 새로 만들 토큰 수 제한                                                                       |
-|               | `do_sample`, `temperature` | 텍스트 생성 다양성 조절 (`do_sample=True`, `temperature=0.7` 추천)                                      |
-| **배치 처리**  | `batch_size`               | 여러 문장 처리 시 한 번에 넣을 크기                                                                       |
-
-
-| 태스크                              | 추가 인자                                                                                                        | 설명                                               |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| **text-generation**              | `max_new_tokens`, `temperature`, `top_k`, `top_p`, `num_return_sequences`, `do_sample`, `repetition_penalty` | 텍스트 생성 제어                                        |
-| **summarization**                | `max_length`, `min_length`, `truncation`, `num_beams`                                                        | 요약 길이 및 탐색 범위                                    |
-| **translation**                  | `max_length`, `num_beams`, `forced_bos_token_id`                                                             | 번역 설정                                            |
-| **question-answering**           | `top_k`, `max_answer_len`, `handle_impossible_answer`                                                        | 정답 후보 개수, 최대 길이                                  |
-| **text-classification**          | `top_k`, `function_to_apply`, `aggregation_strategy`                                                         | 상위 라벨 수, 확률 변환 함수                                |
-| **token-classification**         | `aggregation_strategy`                                                                                       | NER 등에서 엔티티 병합 방식 (`simple`, `first`, `average`) |
-| **image-classification**         | `top_k`                                                                                                      | 상위 k개 라벨                                         |
-| **automatic-speech-recognition** | `chunk_length_s`, `stride_length_s`, `return_timestamps`                                                     | 오디오 분할 및 타임스탬프 반환                                |
+주요 메서드
+| 메서드                      | 역할                                         |
+| ------------------------ | ------------------------------------------ |
+| `__init__()`             | 모델, 토크나이저, 전처리기, 장치(device) 초기화            |
+| `_sanitize_parameters()` | `__call__()`에 들어온 인자 중 각 단계에 필요한 것만 정리     |
+| `preprocess()`           | 입력을 모델이 이해할 수 있는 형태로 변환 (ex: 토큰화, 이미지 텐서화) |
+| `_forward()`             | 모델을 실행 (torch inference)                   |
+| `postprocess()`          | 모델 출력(logits 등)을 사람이 읽을 수 있는 형태로 변환        |
+| `__call__()`             | 위 3단계를 순서대로 실행하여 결과 반환                     |
+| `batch()` / `iterator()` | 대량 입력(batch) 처리를 위한 내부 유틸                  |
+| `save_pretrained()`      | 파이프라인 전체(모델+전처리기 등) 저장                     |
+| `device`                 | CPU/GPU 장치 관리용 속성                          |
 
 
 ---
