@@ -143,6 +143,7 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 | `return_dict_in_generate`                      | 반환 값을 `ModelOutput` 형태(딕셔너리처럼)로 받을지 여부. `True`로 하면 `sequences`, `scores` 등이 포함됨.  |
 | `output_scores`                                | 생성 도중 또는 생성 후에 각 토큰별 점수(로그 확률 등)를 함께 출력할지 여부.                                     |
 
+주의!: batch_size > 1일 때 디코더-전용구조, 인코더-디코더, 모델 종류에 따라 적절한 패딩을 넣어야 함
 
 ### `tokenizer.batch_decode()`
 
