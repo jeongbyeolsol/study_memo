@@ -36,6 +36,8 @@ nn.Module (model) ── forward(x) ──► logits
 
 ### trace.json파일 보는법
 
+trace.json파일은 draw_callback.ipynb에서 매우 간단한 모델을 실행하면서 torch.profiler(모델의 연산 단위별 실행 시간, 메모리 사용량, 커널 호출 등을 기록해주는 전역 분석기 모듈)을 통해 얻은 성능 그래프 파일임
+
 1. tracing파일을 다운받기
 2. chrome://tracing/을 크롬 주소창에 검색 (권한 허용이 필요할 수 있음)
 3. 좌측 상단에 Load를 눌러 tracing파일을 선택
