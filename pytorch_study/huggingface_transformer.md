@@ -74,7 +74,7 @@
 
 return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
-padding 옵션
+**padding=** 옵션
 
 | 값              | 설명                                  |
 | -------------- | ----------------------------------- |
@@ -82,7 +82,7 @@ padding 옵션
 | `"longest"` / `True`   | 배치(batch) 내 **가장 긴 문장 길이**에 맞춰 패딩   |
 | `"max_length"` | 지정한 `max_length` 길이에 맞춰 패딩          |
 
-truncation 옵션
+**truncation=** 옵션
 
 | 값                                | 설명                               |
 | -------------------------------- | -------------------------------- |
