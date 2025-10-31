@@ -126,22 +126,22 @@ return_tensors=: "pt" → PyTorch / "tf" → TensorFlow / "np" → NumPy
 
 | 옵션명                                            | 설명                                                                                                                 |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `max_length`                                   | 생성될 전체 시퀀스의 최대 토큰 길이. 입력 프롬프트 길이를 포함함. ([huggingface.co][1])                                                       |
-| `max_new_tokens`                               | 입력 프롬프트 이후 새로 생성할 토큰의 최대 수 (입력 길이 무시). ([huggingface.co][1])                                                       |
-| `min_length`                                   | 생성될 전체 시퀀스의 최소 토큰 길이. ([huggingface.co][1])                                                                        |
-| `min_new_tokens`                               | 입력 이후 새로 생성할 토큰의 최소 수. ([huggingface.co][1])                                                                       |
-| `do_sample`                                    | 샘플링 방식으로 생성할지 여부 (`True`이면 확률 기반 샘플링, `False`이면 보통 greedy 또는 beam) ([huggingface.co][1])                           |
-| `temperature`                                  | 샘플링 시 확률 분포를 조정하는 온도값. 값이 낮을수록 결정적이고, 높을수록 다양성이 커짐. ([MachineLearningMastery.com][2])                              |
-| `top_k`                                        | 샘플링 시 후보 토큰을 상위 k개로 제한하는 방식. ([huggingface.co][1])                                                                 |
-| `top_p` (또는 nucleus sampling)                  | 누적 확률이 `p` 이하인 토큰 집합에서 샘플링 — top-k보다 더 유연한 방식. ([huggingface.co][3])                                               |
-| `repetition_penalty`                           | 같은 단어나 구가 반복되는 것을 억제하기 위한 패널티 값. ([huggingface.co][1])                                                             |
-| `num_beams`                                    | 빔 서치(Beam Search)를 할 때 사용하는 beam의 개수. `>1`이면 빔 서치, 기본은 1 (greedy) ([huggingface.co][1])                            |
-| `num_return_sequences`                         | 한 번의 generate 호출에서 몇 개의 생성 결과를 반환할지 지정. ([MachineLearningMastery.com][2])                                          |
-| `no_repeat_ngram_size`                         | 생성할 때 연속된 n-gram이 반복되는 것을 방지하는 옵션 (예: 3이면 3-gram 반복 금지) ([huggingface.co][1])                                      |
-| `length_penalty`                               | 빔 서치 결과에서 긴 문장에 패널티를 주거나 반대로 짧은 문장에 유리하게 조정하는 값. ([huggingface.co][1])                                             |
-| `pad_token_id`, `eos_token_id`, `bos_token_id` | 패딩, 문장 종료, 문장 시작 토큰의 ID를 지정하는 옵션. 생성의 종료나 패딩 처리에 중요. ([huggingface.co][3])                                         |
-| `return_dict_in_generate`                      | 반환 값을 `ModelOutput` 형태(딕셔너리처럼)로 받을지 여부. `True`로 하면 `sequences`, `scores` 등이 포함됨. ([MachineLearningMastery.com][2]) |
-| `output_scores`                                | 생성 도중 또는 생성 후에 각 토큰별 점수(로그 확률 등)를 함께 출력할지 여부. ([MachineLearningMastery.com][2])                                    |
+| `max_length`                                   | 생성될 전체 시퀀스의 최대 토큰 길이. 입력 프롬프트 길이를 포함함.                                                        |
+| `max_new_tokens`                               | 입력 프롬프트 이후 새로 생성할 토큰의 최대 수 (입력 길이 무시).                                                        |
+| `min_length`                                   | 생성될 전체 시퀀스의 최소 토큰 길이.                                                                         |
+| `min_new_tokens`                               | 입력 이후 새로 생성할 토큰의 최소 수.                                                                        |
+| `do_sample`                                    | 샘플링 방식으로 생성할지 여부 (`True`이면 확률 기반 샘플링, `False`이면 보통 greedy 또는 beam)                      |
+| `temperature`                                  | 샘플링 시 확률 분포를 조정하는 온도값. 값이 낮을수록 결정적이고, 높을수록 다양성이 커짐.                      |
+| `top_k`                                        | 샘플링 시 후보 토큰을 상위 k개로 제한하는 방식.                                                         |
+| `top_p` (또는 nucleus sampling)                  | 누적 확률이 `p` 이하인 토큰 집합에서 샘플링 — top-k보다 더 유연한 방식.                                               |
+| `repetition_penalty`                           | 같은 단어나 구가 반복되는 것을 억제하기 위한 패널티 값.                                                             |
+| `num_beams`                                    | 빔 서치(Beam Search)를 할 때 사용하는 beam의 개수. `>1`이면 빔 서치, 기본은 1 (greedy)                            |
+| `num_return_sequences`                         | 한 번의 generate 호출에서 몇 개의 생성 결과를 반환할지 지정.                                       |
+| `no_repeat_ngram_size`                         | 생성할 때 연속된 n-gram이 반복되는 것을 방지하는 옵션 (예: 3이면 3-gram 반복 금지)                                       |
+| `length_penalty`                               | 빔 서치 결과에서 긴 문장에 패널티를 주거나 반대로 짧은 문장에 유리하게 조정하는 값.                                           |
+| `pad_token_id`, `eos_token_id`, `bos_token_id` | 패딩, 문장 종료, 문장 시작 토큰의 ID를 지정하는 옵션. 생성의 종료나 패딩 처리에 중요.                                         |
+| `return_dict_in_generate`                      | 반환 값을 `ModelOutput` 형태(딕셔너리처럼)로 받을지 여부. `True`로 하면 `sequences`, `scores` 등이 포함됨.  |
+| `output_scores`                                | 생성 도중 또는 생성 후에 각 토큰별 점수(로그 확률 등)를 함께 출력할지 여부.                                     |
 
 
 ### `tokenizer.batch_decode()`
