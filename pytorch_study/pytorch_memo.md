@@ -53,10 +53,6 @@ torch
   - `torch.cuda.is_available()`
   - `torch.cuda.empty_cache()`
   - `torch.cuda.amp` → 자동 혼합 정밀도 (FP16/FP32 혼합 연산)
-
-#### +)추가 `torch.profiler`
-  - torch.profiler는 PyTorch 연산의 실행 시간·메모리·커널을 추적해주는 성능 분석용 모듈이며, 내부적으로 전역 프로파일링 엔진을 제공
-  - “모델의 느린 부분이 어디서 발생하는지”를 함수 수준부터 GPU 커널 수준까지 정밀하게 가시화해주는 성능 분석 모듈
     
 ### 1step의 거시적 흐름
 
@@ -754,6 +750,12 @@ y = x ** 2
 y.backward()
 print(x.grad)  # tensor([4.])
  ```
+
+---
+
+### `torch.profiler`
+  - torch.profiler는 PyTorch 연산의 실행 시간·메모리·커널을 추적해주는 성능 분석용 모듈이며, 내부적으로 전역 프로파일링 엔진을 제공
+  - “모델의 느린 부분이 어디서 발생하는지”를 함수 수준부터 GPU 커널 수준까지 정밀하게 가시화해주는 성능 분석 모듈
 
 ---
 
