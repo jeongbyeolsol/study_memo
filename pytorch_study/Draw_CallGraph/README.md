@@ -2,7 +2,7 @@
 2. chrome://tracing/을 크롬 주소창에 검색 (권한 허용이 필요할 수 있음)
 3. 좌측 상단에 Load를 눌러 tracing파일을 선택
 
-![call_graph](https://github.com/jeongbyeolsol/study_memo/blob/main/pytorch_study/Practice/Draw_CallGraph/torch_callgraph.png)
+![call_graph](https://github.com/jeongbyeolsol/study_memo/blob/main/pytorch_study/Draw_CallGraph/torch_callgraph.png)
 
 ### 거시적인 흐름의 1 step call graph
 ```
