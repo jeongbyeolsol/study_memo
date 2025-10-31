@@ -4,7 +4,7 @@
 
 
 
-거시적인 흐름의 1 step call graph
+### 거시적인 흐름의 1 step call graph
 ```
 DataLoader → (x, y)
       │
@@ -24,3 +24,11 @@ nn.Module (model) ── forward(x) ──► logits
               Optimizer.zero_grad()
 
 ```
+
+세로선 포함 직사각형: 모듈
+
+사각형: class name
+
+삼각형: 임의의 클래스
+
+동그라미: 함수, 메서드
