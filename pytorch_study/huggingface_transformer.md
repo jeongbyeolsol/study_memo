@@ -393,6 +393,35 @@ Hugging Face의 모든 태스크별 파이프라인(`TextGenerationPipeline`, `I
 
 ---
 
+### GenerationConfig
+
+transformers 라이브러리에서 텍스트 생성 관련 모든 설정을 캡슐화하는 클래스
+
+`outputs = model.generate(**inputs, generation_config=gen_config)`
+
+주요 속성
+| 속성                                                         | 설명                        | 기본값     |
+| ---------------------------------------------------------- | ------------------------- | ------- |
+| **`max_length`**                                           | 입력 포함 전체 시퀀스 최대 길이        | 모델별로 다름 |
+| **`max_new_tokens`**                                       | 새로 생성할 토큰 수 최대값           | `None`  |
+| **`min_length`**                                           | 최소 생성 길이                  | `0`     |
+| **`do_sample`**                                            | 샘플링 활성화 여부                | `False` |
+| **`temperature`**                                          | 샘플링 온도 (낮을수록 결정적)         | `1.0`   |
+| **`top_k`**                                                | 상위 K개의 토큰만 후보로 사용         | `50`    |
+| **`top_p`**                                                | 누적 확률이 p 이하인 토큰만 후보로 사용   | `1.0`   |
+| **`num_beams`**                                            | 빔 탐색 시 beam 크기            | `1`     |
+| **`num_return_sequences`**                                 | 한 번에 반환할 생성 결과 수          | `1`     |
+| **`repetition_penalty`**                                   | 반복 억제 강도 (1.0보다 크면 반복 방지) | `1.0`   |
+| **`length_penalty`**                                       | 빔 탐색 시 긴 문장 패널티           | `1.0`   |
+| **`early_stopping`**                                       | 빔 탐색 중 EOS 도달 시 조기 종료     | `False` |
+| **`pad_token_id`**, **`eos_token_id`**, **`bos_token_id`** | 특수 토큰 ID 설정               | 모델별 다름  |
+| **`return_dict_in_generate`**                              | `ModelOutput` 형태 반환 여부    | `False` |
+| **`output_scores`**                                        | 토큰별 점수(logits) 반환         | `False` |
+| **`output_attentions`**, **`output_hidden_states`**        | 내부 어텐션·히든 상태 반환           | `False` |
+
+
+---
+
 ### `DataCollatorWithPadding`
 
 배치(batch)를 만들 때, 각 문장의 길이를 확인하고 그중 가장 긴 문장에 맞춰 동적으로 패딩을 넣어줌
