@@ -583,6 +583,24 @@ print(out.shape)  # torch.Size([64, 10])
 ```
 ----
 
+### `torch.Generator()`
+
+PyTorch에서 난수(random number) 를 만드는 “난수 생성기(random number generator, RNG)” 클래스
+
+generator매개변수에 torch.Generator클래스를 전달하여 사용
+
+| 메서드 / 속성             | 설명                               |
+| -------------------- | -------------------------------- |
+| `.manual_seed(seed)` | 생성기의 시드를 지정 (고정시켜 재현 가능하게)       |
+| `.seed()`            | 랜덤한 시드를 자동으로 설정 (OS/시스템 seed 사용) |
+| `.get_state()`       | 현재 난수 생성기의 상태를 반환                |
+| `.set_state(state)`  | 저장한 상태를 복원                       |
+| `.initial_seed()`    | 현재 Generator가 가진 초기 seed 값을 반환   |
+
+```
+
+---
+
 ### `torch.device`
 
 텐서나 모델이 어느 장치(CPU, GPU, MPS 등) 위에 있는지를 나타내는 객체
