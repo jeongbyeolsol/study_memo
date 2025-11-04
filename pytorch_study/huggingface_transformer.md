@@ -371,7 +371,7 @@ TrainingArguments: 학습 설정 (batch size, epoch 수, 로그 주기 등)
 
 ---
 
-### Pipeline
+### [Pipeline](https://huggingface.co/docs/transformers/main_classes/pipelines)
 
 Hugging Face의 모든 태스크별 파이프라인(`TextGenerationPipeline`, `ImageClassificationPipeline` 등)의 Base Class
 
