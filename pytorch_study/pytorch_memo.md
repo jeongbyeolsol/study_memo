@@ -699,6 +699,24 @@ nn.Dropout은 nn.Module을 상속한 클래스
 # end_dim (기본=-1): 어디까지 flatten할지 끝 차원
 # start_dim~end_dim 사이의 모든 차원을 1D로 펴버림.
 ```
+#### 자주 사용하는 손실 함수
+
+**분류(Classification)**
+- `nn.CrossEntropyLoss()`: 다중 클래스(배타적, 예: 10클래스)
+
+- `nn.BCEWithLogitsLoss()`: 멀티라벨(비배타적, 예: 여러 태그 동시)
+
+**회귀(Regression)**
+- `nn.MSELoss()`: 기본
+- `nn.SmoothL1Loss()`: 이상치에 덜 민감
+
+**임베딩/거리 학습**
+- `nn.CosineEmbeddingLoss()`: 코사인 유사도 기반
+- `nn.TripletMarginLoss()`: 트리플릿
+
+**시퀀스 특수**
+- `nn.CTCLoss()` (음성/문자열 정렬 불일치)
+- `nn.KLDivLoss(reduction='batchmean')` + LogSoftmax (분포 간 거리)
 
 ---
 
@@ -710,6 +728,14 @@ PyTorch에서 신경망 학습 시 파라미터를 업데이트하는 알고리�
 예: SGD, Adam, RMSprop 등.
 
 모델의 파라미터(model.parameters())를 받아서 gradient 기반으로 업데이트
+
+#### 자주 사용하는 손실 함수
+
+`torch.optim.AdamW`
+
+권장 기본값: lr=1e-3(작은 모델) 또는 5e-4, weight_decay=0.01
+
+트랜스포머/파인튜닝에서도 표준
 
 ---
 
