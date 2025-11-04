@@ -62,8 +62,8 @@ sort_index()        인덱스로 정렬           df.sort_index()
 함수            설명                    예시
 isnull()        결측값 여부             df['age'].isnull()      
                                         NaN → True, 값 있음 → False
-drop()          특정 행 삭제            df.drop('age')
-dropna()        결측값 포함 행 삭제     df.dropna()
+drop()          특정 행 삭제            df.drop('age')      # axis=1 시 열 삭제
+dropna()        결측값 포함 행 삭제     df.dropna()          # axis=1 시 열 삭제
 fillna(value)   결측값 채우기           df['age'].fillna(0)
 notnull()       NaN → False, 값 있음 → True
 fillna()        Replacing missing       df['age'].fillna("Unknown")
