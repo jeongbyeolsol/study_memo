@@ -557,7 +557,7 @@ DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
 
 PyTorch 모든 신경망 레이어와 모델의 부모 클래스
 
-신경망을 만들 때 **“구성(init) + 계산 과정(forward)”**을 정의하는 기본 틀
+신경망을 만들 때 **“구성(init) + 계산 과정(forward)”**\을 정의하는 기본 틀
 
 - 핵심 메서드
   - `__init__`(self)
