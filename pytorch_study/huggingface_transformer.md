@@ -393,9 +393,14 @@ Hugging Face의 모든 태스크별 파이프라인(`TextGenerationPipeline`, `I
 
 ---
 
-### GenerationConfig
+### [`GenerationConfig`](https://huggingface.co/docs/transformers/v4.57.1/ko/main_classes/text_generation#transformers.GenerationConfig)
 
 transformers 라이브러리에서 텍스트 생성 관련 모든 설정을 캡슐화하는 클래스
+
+[`GenerationConfig.save_pretrained()`](https://huggingface.co/docs/transformers/v4.57.1/ko/main_classes/text_generation#transformers.GenerationConfig.save_pretrained)
+을 사용하여 생성 설정을 저장
+
+[`GenerationConfig.from_pretrained()`](https://huggingface.co/docs/transformers/v4.57.1/ko/main_classes/text_generation#transformers.GenerationConfig.from_pretrained)                                 
 
 `outputs = model.generate(**inputs, generation_config=gen_config)`
 
