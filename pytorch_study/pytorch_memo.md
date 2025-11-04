@@ -56,25 +56,7 @@ torch
     
 ### 1step의 거시적 흐름
 
-```
-DataLoader → (x, y)
-      │
-      ▼
-nn.Module (model) ── forward(x) ──► logits
-      │                              │
-      │                           LossFn(logits, y) → loss (scalar)
-      │                              │
-      └─────────── Autograd: loss.backward() ◄──────┘
-                        │
-     각 연산의 grad 계산(그래프 역추적) → Parameter.grad에 누적
-                        │
-                Optimizer.step()
-                        │
-              (옵션) LR Scheduler.step()
-                        │
-              Optimizer.zero_grad()
-
-```
+![call_graph](./Draw_CallGraph/images/torch_callgraph.png)
 
 ---
 
