@@ -676,6 +676,23 @@ backward()가 끝나면 gradient all-reduce로 평균을 맞춤
 > Autograd hook = 특정 텐서의 gradient가 계산되는 순간 자동으로 실행되는 콜백 함수
 > 모든 GPU(프로세스)의 gradient를 all-reduce 해서 평균을 맞출 때 사용
 
+```python
+# 이 프로세스가 담당하는 GPU: cuda:rank
+# model.to(rank) → 모델 파라미터와 버퍼를 해당 GPU로 이동
+model = ToyModel().to(rank)
+
+ddp_model = DDP(model, device_ids=[rank])
+"""
+1. 모델을 DDP 래퍼로 감싼다
+2. 파라미터마다 autograd hook 등록
+3. 초기 파라미터 동기화 (broadcast)
+  보통 rank 0의 모델 파라미터를 기준으로
+  broadcast를 통해 나머지 rank의 모델을 동일하게 맞추는 작업을 한 번 해줌
+  그래서 모든 프로세스가 완전히 같은 weight에서 시작하게 됨
+4. device_ids=[rank]
+  “이 DDP 인스턴스는 어떤 GPU를 쓸 것이냐?”를 명시
+"""
+```
 
 ---
 
