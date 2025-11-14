@@ -657,6 +657,23 @@ nn.Dropout은 nn.Module을 상속한 클래스
 
 -----
 
+### [`DistributedDataParallel`](https://docs.pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel)
+
+  - DistributedDataParallel(DDP) = GPU마다 독립된 프로세스가 모델을 올리고 진짜 병렬 학습을 하는 방식
+
+  - DataParallel(DP) = 한 프로세스가 여러 GPU를 관리하는 흉내내는 병렬화(class torch.nn.DataParallel) / 오래된 방식, 간단하지만 느리고 비효율적(사용x)
+
+GPU마다 프로세스 1개 = 1:1 매칭
+
+모든 GPU에 동일한 모델 복사본 존재
+
+각 프로세스는 자기 전용 데이터 shard만 학습
+
+backward()가 끝나면 gradient all-reduce로 평균을 맞춤
+→ 모든 GPU 모델이 항상 동일한 weight 유지
+
+---
+
 ## 모듈 정리
 
 ### [`torch.utils.data`](https://docs.pytorch.org/docs/stable/data.html)
