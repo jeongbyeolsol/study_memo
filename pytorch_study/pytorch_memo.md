@@ -835,6 +835,8 @@ GPU 1개당 프로세스 1개 → 1:1 매칭
 
 `mp.spawn()`: 여러 프로세스를 자동으로 띄워주는 함수.
 
+mp.spawn은 world_size 개수의 새로운 프로세스를 만들고,
+각 프로세스에서 demo_fn(rank, *args) 를 호출
 ```python
 mp.spawn(
     fn=train,
