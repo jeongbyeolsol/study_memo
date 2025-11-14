@@ -843,7 +843,7 @@ DDP 동작을 위한 “통신/초기화 기능”
 
 대표 API
 
-- `dist.init_process_group()`: DDP를 쓰기 위한 분산 통신 초기화 함수
+- `dist.init_process_group()`: DDP를 쓰기 위한 분산 통신 초기화 함수 / 이미 만들어진 프로세스들을 연결만 해주는 역할
 ```python
 dist.init_process_group(
     backend="nccl",  # (NCCL, Gloo 등)
