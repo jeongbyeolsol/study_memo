@@ -846,7 +846,7 @@ DDP 동작을 위한 “통신/초기화 기능”
 - `dist.init_process_group()`: DDP를 쓰기 위한 분산 통신 초기화 함수
 ```python
 dist.init_process_group(
-    backend="nccl",
+    backend="nccl",  # (NCCL, Gloo 등)
     rank=rank,
     world_size=world_size
 )
