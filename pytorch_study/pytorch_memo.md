@@ -672,6 +672,11 @@ GPU마다 프로세스 1개 = 1:1 매칭
 backward()가 끝나면 gradient all-reduce로 평균을 맞춤
 → 모든 GPU 모델이 항상 동일한 weight 유지
 
+
+> Autograd hook = 특정 텐서의 gradient가 계산되는 순간 자동으로 실행되는 콜백 함수
+> 모든 GPU(프로세스)의 gradient를 all-reduce 해서 평균을 맞출 때 사용
+
+
 ---
 
 ## 모듈 정리
