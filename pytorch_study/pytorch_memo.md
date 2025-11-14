@@ -807,6 +807,88 @@ print(x.grad)  # tensor([4.])
 
 ---
 
+### `torch.multiprocessing`
+
+Python multiprocessing을 PyTorch용으로 개선한 버전
+
+각 GPU마다 “독립된 프로세스”를 깔끔하게 띄우기 위한 도구
+
+DDP의 기본 규칙:
+GPU 1개당 프로세스 1개 → 1:1 매칭
+
+`mp.spawn()`: 여러 프로세스를 자동으로 띄워주는 함수.
+
+```python
+mp.spawn(
+    fn=train,
+    args=(world_size,),
+    nprocs=world_size,
+    join=True
+)
+```
+
+- world_size 값(=GPU 수)만큼 프로세스를 자동으로 생성
+
+- process rank(0,1,2,...)를 첫 번째 인자로 넘겨줌
+
+- 고장난 프로세스가 있으면 전체를 clean하게 종료
+
+---
+
+### `torch.distributed`
+
+분산 학습을 위한 통신 백엔드 + 제어 API를 묶어 놓은 큰 서브시스템
+
+DDP 동작을 위한 “통신/초기화 기능”
+
+대표 API
+
+- `dist.init_process_group()`: DDP를 쓰기 위한 분산 통신 초기화 함수
+```python
+dist.init_process_group(
+    backend="nccl",
+    rank=rank,
+    world_size=world_size
+)
+```
+
+- `dist.all_reduce()`: 각 프로세스의 텐서를 합쳐서(reduce) 다시 모든 프로세스에 배포(all)함 / DDP에서는 gradient 평균내기에 사용됨.
+```python
+tensor = torch.tensor([1.0]).cuda(rank)
+dist.all_reduce(tensor, op=dist.ReduceOp.SUM)
+```
+
+- `dist.broadcast()`: 한 프로세스(rank 0 등)의 값을 모든 프로세스로 복사해서 똑같이 맞춤.
+```python
+dist.broadcast(model_weight, src=0)
+```
+
+- `dist.barrier()`: 모든 프로세스가 이 지점에 도달할 때까지 기다림
+```python
+dist.barrier()
+```
+
+- `dist.reduce_scatter()`: “reduce + scatter”를 한 번에 함.
+  1. 모든 rank의 텐서를 모아서 reduce
+  2. reduce된 결과를 각각 일부분으로 나누어 rank에 흩뿌림(scatter)
+
+- `dist.all_gather()`: 각 rank가 가지고 있는 데이터를 모든 rank에 쫙 모아서 전달
+```python
+gather_list = [torch.zeros_like(tensor) for _ in range(world_size)]
+dist.all_gather(gather_list, tensor)
+```
+
+| 함수                     | 역할                                | DDP에서 사용 시점         |
+| ---------------------- | --------------------------------- | ------------------- |
+| **init_process_group** | 프로세스 그룹 초기화                       | 학습 시작 전             |
+| **broadcast**          | 한 rank의 데이터를 전체에 복사               | 초기 weight sync      |
+| **all_reduce**         | 모든 rank의 텐서를 reduce해서 모든 rank에 배포 | gradient 평균내기       |
+| **barrier**            | 모든 rank sync                      | checkpoint 중, debug |
+| **reduce_scatter**     | reduce 후 결과를 나누어 배포               | 고급 최적화(FSDP/ZeRO)   |
+| **all_gather**         | 모든 rank의 데이터를 모음                  | 샤딩된 파라미터 복원         |
+
+---
+
 ## torch 최상위 패키지 구조
 
 ```
